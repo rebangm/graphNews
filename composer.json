@@ -1,5 +1,15 @@
 {
     "require": {
-        "silex/silex": "~1.3"
+        "silex/silex": "~1.3",
+        "monolog/monolog": "~1.15",
+        "twig/twig": "~1.18",
+        "symfony/var-dumper": "~2.6",
+        "knplabs/console-service-provider": "dev-master"
+
+    },
+    "autoload": {
+        "psr-0": {
+            "GraphNews": "src/"
+        }
     }
 }
