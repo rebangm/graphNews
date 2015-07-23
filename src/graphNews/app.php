@@ -29,8 +29,6 @@ $app->register(new TwigServiceProvider,
 $app['twig'] = $app->extend('twig', function ($twig, $app) {
     // add custom globals, filters, tags, ...
     $twig->addFunction(new \Twig_SimpleFunction('asset', function ($asset) use ($app) {
-        var_dump($app['request_stack']->getMasterRequest()->getBasepath());
-        var_dump($app['request_stack']->getMasterRequest()->getBasepath().'/'.ltrim($asset, '/'));
         return $app['request_stack']->getMasterRequest()->getBasepath().'/'.ltrim($asset, '/');
     }));
     return $twig;
