@@ -13,4 +13,8 @@ $app = new  GraphNews\GraphNewsApplication();
 require_once __DIR__.'/../src/GraphNews/app.php';
 require_once __DIR__.'/../src/GraphNews/routes.php';
 
-$app->run();
+try {
+    $app->run();
+}catch(\Exception $e){
+    $app->log($e->getMessage(), array(), Logger::CRITICAL);
+}
