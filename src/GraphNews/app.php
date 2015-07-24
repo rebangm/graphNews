@@ -9,8 +9,6 @@ define("PROJECT_DIR", realpath(__DIR__ ."/../../"));
 define("SRC_DIR", PROJECT_DIR ."/src/GraphNews");
 !Defined("ENV") ? define("ENV","prod") : "" ;
 
-require_once SRC_DIR ."/Config/".ENV.".php";
-
 $app->register(new MonologServiceProvider,
     array('monolog.logfile' => PROJECT_DIR . '/var/log/app' . date("Y-m-d") . '.log')
 );
@@ -41,6 +39,8 @@ $app->register(new FormServiceProvider);
 
 
 
+
+require_once SRC_DIR ."/Config/".ENV.".php";
 
 
 //$app->register(new HttpCacheServiceProvider,array('http_cache.cache_dir'=>ROOT.'/../temp/'));
