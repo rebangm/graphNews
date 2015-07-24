@@ -21,7 +21,7 @@ class HomeController extends Controller{
             'content' => "hello world in my new silex Application!!!"
         ));
        */
-       return $app->render('index.html.twig', array(
+       return $app->render('Front/index.html.twig', array(
             'welcome' => "hello world in my new silex Application!!!"
         ));
     }

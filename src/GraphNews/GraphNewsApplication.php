@@ -11,4 +11,5 @@ use Silex\Application;
 
 class GraphNewsApplication extends Application {
     use Application\TwigTrait;
+    use Application\MonologTrait;
 }

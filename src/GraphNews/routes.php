@@ -16,6 +16,9 @@ $app->get('/hello/{name}', function ($name) use ($app) {
 });
 
 $app->error(function (\Exception $e, $code) use($app) {
+    if($app['debug'] === true)
+            echo '<pre>'.$e.'</pre>';
+
     $templates = array(
         'errors/'.$code.'.html.twig',
         'errors/'.substr($code, 0, 2).'x.html.twig',

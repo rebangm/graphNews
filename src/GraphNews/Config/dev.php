@@ -1,3 +1,4 @@
 <?php
 
-require "./prod.php";
+$app['debug'] = true;
+require "prod.php";
