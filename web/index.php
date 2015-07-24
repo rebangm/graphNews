@@ -9,8 +9,8 @@
 require_once __DIR__.'/../vendor/autoload.php';
 
 
-$app = new Silex\Application();
-require_once __DIR__.'/../src/graphNews/app.php';
-require_once __DIR__.'/../src/graphNews/routes.php';
+$app = new  GraphNews\GraphNewsApplication();
+require_once __DIR__.'/../src/GraphNews/app.php';
+require_once __DIR__.'/../src/GraphNews/routes.php';
 
 $app->run();

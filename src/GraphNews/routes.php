@@ -6,12 +6,10 @@
  * Time: 17:23
  */
 
-
+use GraphNews\Front;
 use Symfony\Component\HttpFoundation\Response;
 
-$app->get('/', function () use ($app) {
-    return 'Hello World !!!';
-});
+$app->get('/', 'GraphNews\\Front\\HomeController::render');
 
 $app->get('/hello/{name}', function ($name) use ($app) {
     return 'Hello '.$app->escape($name);

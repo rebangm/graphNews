@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "804ac2b687cbf515f01b74deed357968",
+    "hash": "7c3db5706ec150e0caed7da5f14b3cab",
     "packages": [
         {
             "name": "knplabs/console-service-provider",
