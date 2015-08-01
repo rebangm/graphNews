@@ -4,12 +4,22 @@
         "monolog/monolog": "~1.15",
         "twig/twig": "~1.18",
         "symfony/var-dumper": "~2.6",
-        "knplabs/console-service-provider": "dev-master"
+        "knplabs/console-service-provider": "dev-master",
+        "rebangm/silex-guzzlehttp-provider": "~1.2",
+        "symfony/filesystem": "~2.7"
 
     },
     "autoload": {
         "psr-4": {
             "GraphNews\\": "src/GraphNews"
         }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "GraphNews\\Installer::postInstall"
+        ],
+        "post-update-icmd": [
+            "GraphNews\\Installer::postPackageInstall"
+        ]
     }
 }
