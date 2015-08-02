@@ -24,12 +24,15 @@ $app->get('/hello/{name}', function ($name) use ($app) {
 $app->error(function (\Exception $e, $code) use($app) {
     if($app['debug'] === true && $app['request']->query->has('debug') && $app['request']->query->get('debug') == true)
             $message = $e->getMessage();
+    $templatePath = "errors";
+    if(preg_match("#/manager.*#",$app['request']->getRequestUri()))
+        $templatePath = "errors/Manager";
 
     $templates = array(
-        'errors/'.$code.'.html.twig',
-        'errors/'.substr($code, 0, 2).'x.html.twig',
-        'errors/'.substr($code, 0, 1).'xx.html.twig',
-        'errors/default.html.twig',
+        $templatePath.'/'.$code.'.html.twig',
+        $templatePath.'/'.substr($code, 0, 2).'x.html.twig',
+        $templatePath.'/'.substr($code, 0, 1).'xx.html.twig',
+        $templatePath.'/default.html.twig',
     );
     return new Response($app['twig']->resolveTemplate($templates)->render(array('code' => $code,'message' =>$message)), $code);
 });
