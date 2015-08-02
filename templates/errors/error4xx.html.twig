@@ -1,5 +1,8 @@
 {% extends "layout.html.twig" %}
 
 {% block content %}
-Page not found.
+    {% if message %}
+        <pre>{{  message }}</pre>
+    {%  endif %}
+    Page not found.
 {% endblock %}
