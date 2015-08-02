@@ -13,6 +13,7 @@ $app = new  GraphNews\GraphNewsApplication();
 require_once __DIR__.'/../src/GraphNews/app.php';
 require_once __DIR__.'/../src/GraphNews/routes.php';
 
+use Monolog\Logger;
 try {
     $app->run();
 }catch(\Exception $e){
