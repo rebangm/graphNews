@@ -10,19 +10,22 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class Installer {
 
+    /**TODO implement asset
+     * @param Event $event
+     */
     public static function postInstall(Event $event) {
         self::install($event);
         // exit composer and terminate installation process
         exit;
     }
 
-    public static function postUpdate(Event $event) {
-        self::install($event);
+    public static function installDatabase(Event $event) {
+
         // exit composer and terminate installation process
         exit;
     }
 
-    private static function install(Event $event){
+    public static function installStructure(Event $event){
         $paths = ["/../../var/cache","/../../var/log"];
         try {
             $filesystem = new Filesystem();

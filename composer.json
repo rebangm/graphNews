@@ -15,10 +15,12 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "GraphNews\\Installer::postInstall"
+            "GraphNews\\Installer::installStructure",
+            "GraphNews\\Installer::installDatabase"
         ],
         "post-update-icmd": [
-            "GraphNews\\Installer::postPackageInstall"
+            "GraphNews\\Installer::installStructure",
+            "GraphNews\\Installer::installDatabase"
         ]
     }
 }
