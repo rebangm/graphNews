@@ -6,7 +6,6 @@
  * Time: 17:23
  */
 
-use GraphNews\Front;
 use Symfony\Component\HttpFoundation\Response;
 
 
