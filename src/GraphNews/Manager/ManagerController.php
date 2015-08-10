@@ -25,7 +25,7 @@ class ManagerController extends Controller{
 
 
     public function index(Request $request, Application $app){
-
+        var_dump("TOTO");
         return $app->render('Manage/index.html.twig', array(
             'welcome' => "Administration"
         ));
