@@ -1,5 +1,6 @@
 <?php
 
+use Silex\Provider\DoctrineServiceProvider;
 use Silex\Provider\FormServiceProvider;
 use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\TwigServiceProvider;
@@ -37,22 +38,21 @@ $app['twig'] = $app->extend('twig', function ($twig, $app) {
 
 $app->register(new FormServiceProvider);
 
+//$app->register(new HttpCacheServiceProvider,array('http_cache.cache_dir'=>ROOT.'/../temp/'));
 
+$app->register(new DoctrineServiceProvider, array(
+    "db.options" => array(
+        "dbname"   => "graphnews",
+        "host"     => "localhost",
+        "user"     => "graphnews",
+        "password" => "graphnews",
+//      "port"     => getenv('SYMFONY__SHORTEN__PORT'),
+        "driver"   => "pdo_mysql",
+    )
+));
 
 
 require_once SRC_DIR ."/Config/".ENV.".php";
 
 
-//$app->register(new HttpCacheServiceProvider,array('http_cache.cache_dir'=>ROOT.'/../temp/'));
-/*
-$app->register(new DoctrineServiceProvider, array(
-    "db.options" => array(
-        "dbname"   => getenv('SYMFONY__SHORTEN__DBNAME'),
-        "host"     => getenv('SYMFONY__SHORTEN__HOST'),
-        "user" => getenv('SYMFONY__SHORTEN__USER'),
-        "password" => getenv('SYMFONY__SHORTEN__PASSWORD'),
-//                "port"     => getenv('SYMFONY__SHORTEN__PORT'),
-        "driver"   => "pdo_mysql",
-    )
-));
-*/
+
