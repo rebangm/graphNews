@@ -6,15 +6,16 @@
  * Time: 13:32
  */
 
-namespace GraphNews\Front;
+namespace GraphNews\Controller\Front;
 
 
 use GraphNews\Controller;
+use GraphNews\Controller\BaseController;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Monolog\Logger;
 
-class HomeController extends Controller{
+class HomeController extends BaseController{
 
     public function index(Request $request, Application $app){
        /*
@@ -24,6 +25,7 @@ class HomeController extends Controller{
        */
         //$app->log("test log", array("tut","tyii"), Logger::CRITICAL);
         //$app['monolog']->addDebug("youhou");
+
 
        return $app->render('Front/index.html.twig', array(
             'welcome' => "hello world in my new silex Application!!!",

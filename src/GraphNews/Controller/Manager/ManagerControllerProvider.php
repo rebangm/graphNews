@@ -5,7 +5,7 @@
  * Time: 19:02
  */
 
-namespace GraphNews\Manager;
+namespace GraphNews\Controller\Manager;
 use Silex\Application;
 use Silex\ControllerProviderInterface;
 
@@ -22,10 +22,9 @@ class ManagerControllerProvider implements ControllerProviderInterface
             return $app->redirect('/manager');
         });*/
 
-        $controllers->get('/', 'GraphNews\\Manager\\ManagerController::index');
-        $controllers->get('/crawler', 'GraphNews\\Manager\\ManagerController::crawler');
-        $controllers->get('/toto', 'GraphNews\\Manager\\ManagerController::render');
-        //$controllers->get('/toto', 'GraphNews\\Manager\\ManagerController::render');
+        $controllers->get('/', 'GraphNews\\Controller\\Manager\\ManagerController::index');
+        $controllers->get('/crawler', 'GraphNews\\Controller\\Manager\\ManagerController::crawler');
+        $controllers->get('/toto', 'GraphNews\\Controller\\Manager\\ManagerController::render');
 
 
         return $controllers;

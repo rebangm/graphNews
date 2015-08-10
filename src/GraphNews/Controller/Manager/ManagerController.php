@@ -6,32 +6,28 @@
  * Time: 13:32
  */
 
-namespace GraphNews\Manager;
+namespace GraphNews\Controller\Manager;
 
 
-use GraphNews\Controller;
+use GraphNews\Controller\BaseController;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Monolog\Logger;
 
-class ManagerController extends Controller{
+class ManagerController extends BaseController{
 
     public function render(Request $request, Application $app){
 
-       return $app->render('Manage/index.html.twig', array(
+        return $app->render('Manage/index.html.twig', array(
             'welcome' => "Administration Toto"
         ));
     }
 
 
     public function index(Request $request, Application $app){
-        var_dump("TOTO");
+
         return $app->render('Manage/index.html.twig', array(
             'welcome' => "Administration"
         ));
-    }
-
-    public function error(Request $request, Application $app){
-
     }
 }

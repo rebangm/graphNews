@@ -10,10 +10,10 @@ use GraphNews\Front;
 use Symfony\Component\HttpFoundation\Response;
 
 
-$app->get('/', 'GraphNews\\Front\\HomeController::index');
-$app->get('/about', 'GraphNews\\Front\\HomeController::about');
+$app->get('/', 'GraphNews\\Controller\\Front\\HomeController::index');
+$app->get('/about', 'GraphNews\\Controller\\Front\\HomeController::about');
 
-$app->mount('/manager', new GraphNews\Manager\ManagerControllerProvider());
+$app->mount('/manager', new GraphNews\Controller\Manager\ManagerControllerProvider());
 
 
 $app->error(function (\Exception $e, $code) use($app) {
