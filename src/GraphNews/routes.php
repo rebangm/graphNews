@@ -9,7 +9,8 @@
 use GraphNews\Front;
 use Symfony\Component\HttpFoundation\Response;
 
-$app->get('/', 'GraphNews\\Front\\HomeController::render');
+$app->mount('/', new GraphNews\Front\FrontControllerProvider());
+//$app->get('/', 'GraphNews\\Front\\HomeController::index');
 
 $app->get('/hello/{name}', function ($name) use ($app) {
     return 'Hello '.$app->escape($name);
@@ -17,9 +18,6 @@ $app->get('/hello/{name}', function ($name) use ($app) {
 
 $app->mount('/manager', new GraphNews\Manager\ManagerControllerProvider());
 
-$app->get('/hello/{name}', function ($name) use ($app) {
-    return 'Hello '.$app->escape($name);
-});
 
 $app->error(function (\Exception $e, $code) use($app) {
     if($app['debug'] === true && $app['request']->query->has('debug') && $app['request']->query->get('debug') == true)

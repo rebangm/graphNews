@@ -22,8 +22,8 @@ class FrontControllerProvider implements ControllerProviderInterface
             return $app->redirect('/manager');
         });*/
 
-        $controllers->get('/', 'GraphNews\\Front\\HomeController::render');
-        $controllers->get('/test', 'GraphNews\\Front\\HomeController::render');
+        $controllers->get('/', 'GraphNews\\Front\\HomeController::index');
+        $controllers->get('/about', 'GraphNews\\Front\\HomeController::about');
         return $controllers;
     }
 

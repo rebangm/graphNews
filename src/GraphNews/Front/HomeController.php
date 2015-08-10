@@ -16,7 +16,7 @@ use Monolog\Logger;
 
 class HomeController extends Controller{
 
-    public function render(Request $request, Application $app){
+    public function index(Request $request, Application $app){
        /*
        return $app['twig']->render('index.html.twig', array(
             'content' => "hello world in my new silex Application!!!"
@@ -26,7 +26,17 @@ class HomeController extends Controller{
         //$app['monolog']->addDebug("youhou");
 
        return $app->render('Front/index.html.twig', array(
-            'welcome' => "hello world in my new silex Application!!!"
+            'welcome' => "hello world in my new silex Application!!!",
+           'nav_active' => "home"
+        ));
+    }
+
+    public function about(Request $request, Application $app){
+
+
+        return $app->render('Front/about.html.twig', array(
+            'content' => "About us",
+            'nav_active' => "about"
         ));
     }
 }
