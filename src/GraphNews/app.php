@@ -7,6 +7,8 @@ use Silex\Provider\TwigServiceProvider;
 use Knp\Provider\ConsoleServiceProvider;
 use SilexGuzzle\GuzzleServiceProvider;
 
+$app = new  GraphNews\GraphNewsApplication();
+
 define("PROJECT_DIR", realpath(__DIR__ . "/../../"));
 define("SRC_DIR", PROJECT_DIR . "/src/GraphNews");
 !Defined("ENV") ? define("ENV", "prod") : "";
@@ -41,10 +43,6 @@ $app['twig'] = $app->extend('twig', function ($twig, $app) {
     return $twig;
 });
 
-$app->register(new FormServiceProvider);
-
-//$app->register(new HttpCacheServiceProvider,array('http_cache.cache_dir'=>ROOT.'/../temp/'));
-
 $app->register(new DoctrineServiceProvider, array(
     "db.options" => array(
         "dbname" => "graphnews",
@@ -55,8 +53,26 @@ $app->register(new DoctrineServiceProvider, array(
     )
 ));
 
+$app->register(new ORM\Provider\DoctrineORMServiceProvider(), array(
+    'db.orm.class_path'            => PROJECT_DIR.'/vendor/doctrine/orm/lib',
+    'db.orm.proxies_dir'           => PROJECT_DIR.'/var/cache/doctrine/Proxy',
+    'db.orm.proxies_namespace'     => 'DoctrineProxy',
+    'db.orm.auto_generate_proxies' => true,
+    'db.orm.entities'              => array(array(
+        'type'      => 'annotation',
+        'path'      => SRC_DIR.'/Entity',
+        'namespace' => 'GraphNews\Entity',
+    )),
+));
+
+$app->register(new FormServiceProvider);
+
+//$app->register(new HttpCacheServiceProvider,array('http_cache.cache_dir'=>ROOT.'/../temp/'));
+
+
+
 
 require_once SRC_DIR . "/Config/" . ENV . ".php";
 
-
+return $app;
 
