@@ -43,6 +43,8 @@ $app['twig'] = $app->extend('twig', function ($twig, $app) {
     return $twig;
 });
 
+$app->register(new Silex\Provider\UrlGeneratorServiceProvider());
+
 $app->register(new DoctrineServiceProvider, array(
     "db.options" => array(
         "dbname" => "graphnews",
@@ -67,7 +69,36 @@ $app->register(new ORM\Provider\DoctrineORMServiceProvider(), array(
 
 $app->register(new FormServiceProvider);
 
+$app->register(new Silex\Provider\SessionServiceProvider());
+
 //$app->register(new HttpCacheServiceProvider,array('http_cache.cache_dir'=>ROOT.'/../temp/'));
+
+$app->register(new Silex\Provider\SecurityServiceProvider(), array(
+    'security.encoders' => array(
+        'GraphNews\Entity\User' => 'sha512'
+    ),
+
+    'security.firewalls' => array(
+        'login' => array(
+            'pattern' => '^/manager/login$',
+            'anonymous' => true,
+        ),
+        'secured_area' => array(
+            'pattern' => '^/manager',
+            'form' => array('login_path' => '/manager/login', 'check_path' => '/manager/login_check'),
+            'logout' => array('logout_path' => '/manager/logout', 'invalidate_session' => true),
+            'users' => $app->share(function() use ($app) {
+                        $em = $app['db.orm.em'];
+                        return $em->getRepository('GraphNews\Entity\User');
+                    }
+                // raw password is foo
+                // array(
+                //'admin' => array('ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='),
+            ),
+        ),
+    )
+));
+
 
 
 

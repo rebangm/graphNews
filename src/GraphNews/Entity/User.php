@@ -8,6 +8,7 @@
 namespace GraphNews\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * User
  *
@@ -15,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @Entity(repositoryClass="GraphNews\Entity\UserRepository")
  */
 
-class User {
+class User implements UserInterface{
 
     /**
      * @var integer
@@ -316,5 +317,16 @@ class User {
     public function getMail()
     {
         return $this->mail;
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
     }
 }

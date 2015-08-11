@@ -17,6 +17,8 @@
 
     <link href="{{ asset('css/manager/dashboard.css') }}" rel="stylesheet" type="text/css" />
 
+    {% block css_include %}{% endblock %}
+
     <script type="text/javascript">
     </script>
 </head>
@@ -34,10 +36,9 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Dashboard</a></li>
                     <li><a href="#">Settings</a></li>
                     <li><a href="#">Profile</a></li>
-                    <li><a href="#">Help</a></li>
+                    <li><a href="{{ path('manager_logout') }}">logout</a></li>
                 </ul>
                 <form class="navbar-form navbar-right">
                     <input type="text" class="form-control" placeholder="Search...">
@@ -70,5 +71,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    {% block js_include %}{% endblock %}
 </body>
 </html>

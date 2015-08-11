@@ -25,6 +25,8 @@ class ManagerControllerProvider implements ControllerProviderInterface
         $controllers->get('/', 'GraphNews\\Controller\\Manager\\ManagerController::index');
         $controllers->get('/crawler', 'GraphNews\\Controller\\Manager\\ManagerController::crawler');
         $controllers->get('/toto', 'GraphNews\\Controller\\Manager\\ManagerController::render');
+        $controllers->get('/login', 'GraphNews\\Controller\\Manager\\SecurityController::login');
+
 
 
         return $controllers;

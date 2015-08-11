@@ -9,7 +9,13 @@
         "symfony/filesystem": "~2.7",
         "fredjuvaux/doctrine-orm-provider": "dev-master",
         "symfony/class-loader": "^2.7",
-        "symfony/security": "^2.7"
+        "symfony/security": "^2.7",
+        "symfony/twig-bridge": "^2.7",
+        "symfony/form": "^2.7",
+        "symfony/validator": "^2.7",
+        "symfony/config": "^2.7",
+        "symfony/translation": "^2.7",
+        "symfony/security-csrf": "^2.7"
     },
     "autoload": {
         "psr-4": {

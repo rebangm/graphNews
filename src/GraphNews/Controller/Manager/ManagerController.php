@@ -18,7 +18,7 @@ class ManagerController extends BaseController{
 
     public function render(Request $request, Application $app){
 
-        return $app->render('Manage/index.html.twig', array(
+        return $app->render('Manager/index.html.twig', array(
             'welcome' => "Administration Toto"
         ));
     }
@@ -26,7 +26,7 @@ class ManagerController extends BaseController{
 
     public function index(Request $request, Application $app){
 
-        return $app->render('Manage/index.html.twig', array(
+        return $app->render('Manager/index.html.twig', array(
             'welcome' => "Administration"
         ));
     }
