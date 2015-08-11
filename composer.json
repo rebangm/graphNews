@@ -8,7 +8,8 @@
         "rebangm/silex-guzzlehttp-provider": "~1.2",
         "symfony/filesystem": "~2.7",
         "fredjuvaux/doctrine-orm-provider": "dev-master",
-        "symfony/class-loader": "^2.7"
+        "symfony/class-loader": "^2.7",
+        "symfony/security": "^2.7"
     },
     "autoload": {
         "psr-4": {
