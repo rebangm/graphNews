@@ -19,10 +19,10 @@ $app->error(function (\Exception $e, $code) use($app) {
     $message = "";
     if($app['debug'] === true && $app['request']->query->has('debug') && $app['request']->query->get('debug') == true)
             $message = $e->getMessage();
-    $templatePath = "errors";
+    $templatePath = "Errors";
 
     if(preg_match("#/manager.*#",$app['request']->getRequestUri()))
-        $templatePath = "errors/Manager";
+        $templatePath = "Errors/Manager";
 
     $templates = array(
         $templatePath.'/'.$code.'.html.twig',
