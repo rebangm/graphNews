@@ -86,7 +86,9 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
             'users' =>
                 // raw password is foo
                 array(
-                    'jpdepigny' => array('ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='),
+                    'admin' => array('ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='),
+                    'jpdepigny' => array('ROLE_ADMIN', 'XXjpr8P3AHhsSv3pEFkysFe1hS8MVa9QwZLns5+4IiKPlfVDBDCYmmKQkVdv+F9RKywZ+MOIKl2Xp8ibuuKGyw=='),
+
             ),
         ),
     )

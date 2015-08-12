@@ -15,6 +15,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
+
 
 class UserCommand extends Command
 {
@@ -29,12 +31,11 @@ class UserCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
 
-        $dialog = $this->getHelperSet()->get('dialog');
-        $password = $dialog->askHiddenResponse(
-            $output,
-            'Quel est le mot de passe à encoder ? ',
-            false
-        );
+        $question = new Question('What is the password to encode ? ');
+        $question->setHidden(true);
+        $question->setHiddenFallback(false);
+
+        $password =  $this->getHelperSet()->get('question')->ask($input, $output, $question);
 
         $app = $this->getSilexApplication();
         $encodedPassword = $app['security.encoder.digest']->encodePassword($password, '');
