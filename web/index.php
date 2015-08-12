@@ -14,5 +14,5 @@ use Monolog\Logger;
 try {
     $app->run();
 }catch(\Exception $e){
-    $app->log($e->getMessage(), array("toto"), Logger::CRITICAL);
+    $app->log($e->getMessage(), array(), Logger::CRITICAL);
 }

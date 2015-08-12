@@ -17,16 +17,16 @@ $app->register(new MonologServiceProvider, array(
         'monolog.logfile' => PROJECT_DIR . '/var/log/app' . date("Y-m-d") . '.log')
 );
 
-$app->register(new ConsoleServiceProvider, array(
-        'console.name' => 'MyApplication',
-        'console.version' => '1.0.0',
-        'console.project_directory' => PROJECT_DIR . '/..')
-);
-
 $app->register(new GuzzleServiceProvider(), array(
         'guzzle.timeout' => 2)
 );
 
+
+$app->register(new ConsoleServiceProvider, array(
+        'console.name' => 'graphNews Console',
+        'console.version' => '1.0.0',
+        'console.project_directory' => PROJECT_DIR )
+);
 
 $app->register(new TwigServiceProvider, array(
         'twig.path' => array(SRC_DIR . '/View'),
@@ -74,10 +74,6 @@ $app->register(new Silex\Provider\SessionServiceProvider());
 //$app->register(new HttpCacheServiceProvider,array('http_cache.cache_dir'=>ROOT.'/../temp/'));
 
 $app->register(new Silex\Provider\SecurityServiceProvider(), array(
-    'security.encoders' => array(
-        'GraphNews\Entity\User' => 'sha512'
-    ),
-
     'security.firewalls' => array(
         'login' => array(
             'pattern' => '^/manager/login$',
@@ -87,13 +83,10 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
             'pattern' => '^/manager',
             'form' => array('login_path' => '/manager/login', 'check_path' => '/manager/login_check'),
             'logout' => array('logout_path' => '/manager/logout', 'invalidate_session' => true),
-            'users' => $app->share(function() use ($app) {
-                        $em = $app['db.orm.em'];
-                        return $em->getRepository('GraphNews\Entity\User');
-                    }
+            'users' =>
                 // raw password is foo
-                // array(
-                //'admin' => array('ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='),
+                array(
+                    'jpdepigny' => array('ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='),
             ),
         ),
     )
@@ -104,6 +97,7 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
 
 
 require_once SRC_DIR . "/Config/" . ENV . ".php";
+
 
 return $app;
 
