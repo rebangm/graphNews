@@ -1,10 +1,12 @@
 {% extends "layoutManager.html.twig" %}
 
+{% set sidenavActive = sidenavactive %}
 {% block content %}
 
 
         <h1 class="page-header">Dashboard</h1>
         {{ welcome }}
+        {{ sidenavactive }}
 
 
 {% endblock %}

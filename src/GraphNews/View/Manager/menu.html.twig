@@ -1,0 +1,11 @@
+<div class="col-sm-3 col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+                <li {% if sidenavactive|default("dashboard") == "dashboard" %}class="active"{% endif %}><a href="/manager/dashboard">Dashboard{% if sidenavactive == "dashboard" %}<span class="sr-only">(current)</span>{% endif %}</a></li>
+                <li {% if sidenavactive == "crawler" %}class="active"{% endif %}><a href="/manager/crawler">Crawler{% if sidenavactive == "crawler" %}<span class="sr-only">(current)</span>{% endif %}</a>
+                        <ul class="nav nav-sidebar">
+                                <li {% if sidenavactive == "listCrawler" %}class="active"{% endif %}><a href="/manager/crawler/list">listing{% if sidenavactive == "listCrawler" %}<span class="sr-only">(current)</span>{% endif %}</a></li>
+                                <li {% if sidenavactive == "addCrawler" %}class="active"{% endif %}><a href="/manager/crawler/add">add site{% if sidenavactive == "addCrawler" %}<span class="sr-only">(current)</span>{% endif %}</a></li>
+                        </ul>
+                </li>
+        </ul>
+</div>

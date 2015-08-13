@@ -10,17 +10,13 @@ namespace GraphNews\Controller;
 
 
 
-use Silex\Controller;
+
 use Symfony\Component\VarDumper\VarDumper;
 
-class BaseController extends Controller {
+class BaseController{
 
-    public function __construct(){
-
-    }
 
     public function dump($dump){
         VarDumper::dump($dump);
     }
-
 }

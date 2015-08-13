@@ -6,6 +6,8 @@ use Silex\Provider\MonologServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use Knp\Provider\ConsoleServiceProvider;
 use SilexGuzzle\GuzzleServiceProvider;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 $app = new  GraphNews\GraphNewsApplication();
 
@@ -25,7 +27,7 @@ $app->register(new GuzzleServiceProvider(), array(
 $app->register(new ConsoleServiceProvider, array(
         'console.name' => 'graphNews Console',
         'console.version' => '1.0.0',
-        'console.project_directory' => PROJECT_DIR )
+        'console.project_directory' => PROJECT_DIR)
 );
 
 $app->register(new TwigServiceProvider, array(
@@ -35,11 +37,16 @@ $app->register(new TwigServiceProvider, array(
             'cache' => PROJECT_DIR . '/var/cache/twig',
         ))
 );
+
 $app['twig'] = $app->extend('twig', function ($twig, $app) {
     // add custom globals, filters, tags, ...
-    $twig->addFunction(new \Twig_SimpleFunction('asset', function ($asset) use ($app) {
-        return $app['request_stack']->getMasterRequest()->getBasepath() . '/' . ltrim($asset, '/');
-    }));
+    try {
+        $twig->addFunction(new \Twig_SimpleFunction('asset', function ($asset) use ($app) {
+            return $app['request_stack']->getMasterRequest()->getBasepath() . '/' . ltrim($asset, '/');
+        }));
+    } catch (\Exception $e) {
+        //var_dump($e->getMessage());
+    }
     return $twig;
 });
 
@@ -56,13 +63,13 @@ $app->register(new DoctrineServiceProvider, array(
 ));
 
 $app->register(new ORM\Provider\DoctrineORMServiceProvider(), array(
-    'db.orm.class_path'            => PROJECT_DIR.'/vendor/doctrine/orm/lib',
-    'db.orm.proxies_dir'           => PROJECT_DIR.'/var/cache/doctrine/Proxy',
-    'db.orm.proxies_namespace'     => 'DoctrineProxy',
+    'db.orm.class_path' => PROJECT_DIR . '/vendor/doctrine/orm/lib',
+    'db.orm.proxies_dir' => PROJECT_DIR . '/var/cache/doctrine/Proxy',
+    'db.orm.proxies_namespace' => 'DoctrineProxy',
     'db.orm.auto_generate_proxies' => true,
-    'db.orm.entities'              => array(array(
-        'type'      => 'annotation',
-        'path'      => SRC_DIR.'/Entity',
+    'db.orm.entities' => array(array(
+        'type' => 'annotation',
+        'path' => SRC_DIR . '/Entity',
         'namespace' => 'GraphNews\Entity',
     )),
 ));
@@ -84,12 +91,12 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
             'form' => array('login_path' => '/manager/login', 'check_path' => '/manager/login_check'),
             'logout' => array('logout_path' => '/manager/logout', 'invalidate_session' => true),
             'users' =>
-                // raw password is foo
+            // raw password is foo
                 array(
                     'admin' => array('ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='),
                     'jpdepigny' => array('ROLE_ADMIN', 'MBQ7fmCJGGWGzH/Tq+YgRsJ2mHd8lx6vN8ohAWcQ2JXaYmWLg+4feDWeXk0iN6jcDRsEFsAFaip6xZk7+s9jkQ=='),
 
-            ),
+                ),
         ),
     )
 ));
@@ -97,7 +104,12 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
 
 
 
-
+/*
+$app->register(new Silex\Provider\WebProfilerServiceProvider(), array(
+    'profiler.cache_dir' => PROJECT_DIR.'/var/cache/profiler',
+    'profiler.mount_prefix' => '/_profiler', // this is the default
+));
+*/
 require_once SRC_DIR . "/Config/" . ENV . ".php";
 
 

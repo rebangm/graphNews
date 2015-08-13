@@ -16,18 +16,33 @@ use Monolog\Logger;
 
 class ManagerController extends BaseController{
 
-    public function render(Request $request, Application $app){
+    public function test(Request $request, Application $app){
 
         return $app->render('Manager/index.html.twig', array(
             'welcome' => "Administration Toto"
         ));
     }
 
-
     public function index(Request $request, Application $app){
+        return $app->render('Manager/index.html.twig', array(
+            'welcome' => "Administration",
+            'sidenavactive' => "dashboard"
+        ));
+    }
+
+    public function dashboard(Request $request, Application $app){
 
         return $app->render('Manager/index.html.twig', array(
-            'welcome' => "Administration"
+            'welcome' => "dashboard",
+            'sidenavactive' => "dashboard"
+        ));
+    }
+
+    public function crawler(Request $request, Application $app){
+
+        return $app->render('Manager/index.html.twig', array(
+            'welcome' => "crawler",
+            'sidenavactive' => "crawler"
         ));
     }
 }
