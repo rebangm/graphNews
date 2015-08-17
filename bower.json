@@ -1,0 +1,17 @@
+{
+  "name": "dev-graphnews-fr",
+  "version": "0.1.0",
+  "authors": [
+    "Jean-Philippe Dépigny <rebangm@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  }
+}

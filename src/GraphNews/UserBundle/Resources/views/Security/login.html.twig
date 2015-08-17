@@ -1,0 +1,26 @@
+{# src/Sdz/UserBundle/Resources/views/Security/login.html.twig #}
+{% extends "GraphNewsUserBundle::user.html.twig" %}
+
+{% block body %}
+<div class="container">
+    <div class="signin">
+
+        <h1 class="signin-title">Project POS</h1>
+        <form class="form-signin" action="{{ path('graphnews_user_login_check') }}" method="post">
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <label for="username">Login</label>
+            <input type="text" class="form-control" id="username" name="_username" placeholder="Username" value="{{ last_username }}">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="_password" placeholder="Password">
+{#            <input type="hidden" name="_target_path" />#}
+            <label class="checkbox">
+                <input type="checkbox" name="_remember_me" value="remember_me"> Remember me
+            </label>
+            <button class="btn btn-primary btn-large btn-block" type="submit">Login</button>
+        </form>
+    {% if error %}
+        <div class="alert alert-error">{{ error.message }}</div>
+    {% endif %}
+    </div>
+</div> <!-- /container -->
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends "::layout.html.twig" %}
+
+{% block leftmenu %}
+    <ul class="nav nav-pills nav-stacked">
+            <li><a href="{{ path('graphnews_user_manage') }}">Liste des utilisateurs</a></li>
+            <li><a href="{{ path('graphnews_user_manage_adduser') }}">Ajouter un utilisateur</a></li>
+    </ul>
+{% endblock %}

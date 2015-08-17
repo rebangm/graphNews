@@ -1,0 +1,38 @@
+graphnews_user_login:
+    pattern:  /login
+    defaults: { _controller: GraphNewsUserBundle:Security:login }
+
+graphnews_user_login_check:
+    pattern:   /login_check
+ 
+graphnews_user_logout:
+    pattern:   /logout
+
+graphnews_user_manage:
+    pattern:   /user/manage/
+    defaults: { _controller: GraphNewsUserBundle:Manage:index, page : 1 }
+    requirements: 
+        page: \d+
+
+graphnews_user_manage_list:
+    pattern:   /user/manage/page/{page}
+    defaults: { _controller: GraphNewsUserBundle:Manage:index, page : 1 }
+    requirements: 
+        page: \d+
+
+graphnews_user_manage_ajax_active:
+    pattern:   /user/manage/ajax/active/id/{id}/{active}
+    defaults: { _controller: GraphNewsUserBundle:Manage:setActive, id, active }
+    requirements: 
+        id: \d+
+        active: 0|1
+
+graphnews_user_manage_edit:
+    pattern:   /user/manage/edit/{id}
+    defaults: { _controller: GraphNewsUserBundle:Manage:edit }
+    requirements: 
+        page: \d+
+
+graphnews_user_manage_adduser:
+    pattern:   /user/manage/add/
+    defaults: { _controller: GraphNewsUserBundle:Manage:add }

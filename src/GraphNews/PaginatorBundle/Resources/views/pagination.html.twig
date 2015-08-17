@@ -1,0 +1,30 @@
+
+{% if pagination.active %}
+    <div class="pagination pagination-centered">
+      <ul>
+        {% for i in 1..pagination.nbPage %}
+            {% if loop.first %}
+                {% if  pagination.page == 1 %}
+                    <li class="disabled"><span>Prev</span></li>
+                {% else %}
+                    <li><a href="{{ path(pagination.routing, {'page': pagination.prev }) }}">Prev</a></li>
+                {% endif %}
+            {% endif %}
+
+            {% if loop.index == pagination.page %}
+                <li class="active"><a href="{{ path(pagination.routing, {'page': i }) }}">{{i}}</a></li>
+            {% else %}
+                <li><a href="{{ path(pagination.routing, {'page': i }) }}">{{i}}</a></li>
+            {% endif %}
+
+            {% if loop.last %}
+                {% if  pagination.page == loop.index %}
+                    <li class="disabled"><span>Next</span></li>
+                {% else %}
+                    <li><a href="{{ path(pagination.routing, {'page': pagination.next }) }}">Next</a></li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+{% endif %}

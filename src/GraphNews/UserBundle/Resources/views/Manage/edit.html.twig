@@ -1,0 +1,14 @@
+{% extends "GraphNewsUserBundle::user.html.twig" %}
+ 
+{% block content %}
+
+    {% include "GraphNewsHomeBundle::alert.html.twig" %}
+
+    <div class="form">
+       <form action="{{ path('graphnews_user_manage_edit', {'id': id }) }}" {{ form_enctype(form) }} method="POST" novalidate="novalidate">
+            {{ form_widget(form) }}
+        </form>
+    </div>
+ 
+{% endblock %}
+

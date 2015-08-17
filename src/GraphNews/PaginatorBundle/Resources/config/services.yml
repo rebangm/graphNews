@@ -1,0 +1,11 @@
+parameters:
+    graphnews_paginator.class: GraphNews\PaginatorBundle\Pagination\Pagination
+
+services:
+    graphnews_paginator.pagination:
+         class: %graphnews_paginator.class%
+ #       arguments: []
+ #   pos.twig.extension.paginator.pager:
+ #       class: Pos\PaginationBundle\Twig\Extension\PosPagerExtension
+ #       tags:
+ #         - { name: twig.extension }

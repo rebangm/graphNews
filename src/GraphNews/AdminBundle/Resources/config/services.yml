@@ -1,0 +1,4 @@
+services:
+#    graph_news_admin.example:
+#        class: GraphNews\AdminBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

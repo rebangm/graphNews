@@ -1,0 +1,11 @@
+graph_news_front:
+    resource: "@GraphNewsFrontBundle/Resources/config/routing.yml"
+    prefix:   /
+
+graphnews_user:
+    resource: "@GraphNewsUserBundle/Resources/config/routing.yml"
+    prefix:   /manager/
+
+graph_news_admin:
+    resource: "@GraphNewsAdminBundle/Resources/config/routing.yml"
+    prefix:   /manager/

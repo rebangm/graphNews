@@ -1,0 +1,86 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/book/security.html
+security:
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+        GraphNews\UserBundle\Entity\User:
+            algorithm:            pbkdf2
+            hash_algorithm:       sha512
+            encode_as_base64:     false
+            iterations:           1000
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        chain_provider:
+             chain:
+                 providers: [in_memory, user_db]
+        in_memory:
+            memory:
+                users:
+                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+        user_db:
+            entity: { class: GraphNews\UserBundle\Entity\User, property: userName }
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        login:
+        # Cette expression régulière permet de prendre /login (mais pas /login_check !)
+            pattern:   ^/manager/login$
+            security: false
+            anonymous: ~
+
+        manager:
+            pattern:  ^/manager/
+            security: true
+            anonymous: ~
+            provider:  chain_provider
+            form_login:
+                login_path: graphnews_user_login
+                check_path: /manager/login_check
+                post_only: true
+            logout:
+                path:   graphnews_user_logout
+                target: graphnews_user_login
+            remember_me:
+                key:      "%secret%"
+                lifetime: 600
+                path:     /
+                domain:   ~
+        front:
+            pattern:  ^/
+            security: false
+
+        # activate different ways to authenticate
+
+                    # http_basic: ~
+                    # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
+
+                    # form_login: ~
+                    # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+#        login:
+#            pattern:  ^/demo/secured/login$
+#            security: false
+#
+#        secured_area:
+#            pattern:    ^/demo/secured/
+#            form_login:
+#                check_path: _security_check
+#                login_path: _demo_login
+#            logout:
+#                path:   _demo_logout
+#                target: _demo
+            #anonymous: ~
+            #http_basic:
+            #    realm: "Secured Demo Area"
+
+    access_control:
+        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/manager/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/manager/*, roles: ROLE_ADMIN }
+        #- { path: ^/, roles: ROLE_USER }
