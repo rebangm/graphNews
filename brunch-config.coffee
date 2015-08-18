@@ -2,20 +2,23 @@
 exports.config =
   paths:
     'public': 'web'
-    'watched': [ 'app/Resources' ]
+    'watched': [ 'app/Resources','src/' ]
   files:
     javascripts: joinTo:
-      'js/app.js': /^app\/Resources\/(?!external)/
+      'js/app.js': [/^app\/Resources\/(?!external)/, /^src\//]
       'js/external.js': /^app\/Resources\/external.*.min.js/
       'js/vendor.js': /^vendor/
 
     stylesheets: joinTo:
-      'css/style.css': /^app\/Resources\/(?!external)/
+      'css/style.css': [/^app\/Resources\/(?!external)/,/^src\//]
       'css/vendor.css': /^(vendor)/
-      'css/external.css': /^app\/Resources\/external\/bootstrap-3.3.5-dist\/css.*.min.css/
-
+      'css/bootstrap.css': /^app\/Resources\/external\/bootstrap-3.3.5-dist\/css.*.min.css/
   conventions:
-    ignored: [ /\/_/ ]
+    ignored: [
+      /\/_/,
+      /bootstrap(-theme)?.css(.map)?/,
+      /(bootstrap|npm).js/
+    ]
     assets: /^app\/Resources\/assets/
   plugins:
     babel: pattern: /\.(js|jsx)$/
