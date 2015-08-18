@@ -19,7 +19,9 @@ exports.config =
       /bootstrap(-theme)?.css(.map)?/,
       /(bootstrap|npm).js/
     ]
-    assets: /^app\/Resources\/assets/
+    #assets: /^app\/Resources\/assets/
+    assets: (path) ->
+      (not /\.woff/.test path) and /assets(\/|\\)/.test path
   plugins:
     babel: pattern: /\.(js|jsx)$/
     sass: allowCache: true
