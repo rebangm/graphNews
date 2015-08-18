@@ -23,4 +23,5 @@ node_modules
 web/libs
 web/dist
 web/css
+web/js
 app/dist
