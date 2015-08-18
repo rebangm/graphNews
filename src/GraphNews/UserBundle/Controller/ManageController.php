@@ -6,8 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use GraphNews\UserBundle\Entity\User;
-use Graphnews\UserBundle\Form\UserType;
-use Graphnews\UserBundle\Form\UserEditType;
+use GraphNews\UserBundle\Form\UserType;
+use GraphNews\UserBundle\Form\UserEditType;
 
 /**
  * Class ManageController

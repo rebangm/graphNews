@@ -2,7 +2,7 @@
  
 {% block content %}
 
-    {% include "GraphNewsHomeBundle::alert.html.twig" %}
+    {% include "GraphNewsUserBundle::alert.html.twig" %}
 
     <div class="form">
        <form action="{{ path('graphnews_user_manage_adduser') }}" {{ form_enctype(form) }} method="GraphNewsT" novalidate="novalidate">

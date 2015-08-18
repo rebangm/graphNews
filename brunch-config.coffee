@@ -1,16 +1,20 @@
 'use strict'
 exports.config =
+
+  modules:
+    definition: false
+    wrapper: false
   paths:
     'public': 'web'
     'watched': [ 'app/Resources','src/' ]
   files:
     javascripts: joinTo:
-      'js/app.js': [/^app\/Resources\/(?!external)/, /^src\//]
+      'js/application.js': [/^app\/Resources\/(?!external)/, /^src\//]
       'js/external.js': /^app\/Resources\/external.*.min.js/
       'js/vendor.js': /^vendor/
 
     stylesheets: joinTo:
-      'css/style.css': [/^app\/Resources\/(?!external)/,/^src\//]
+      'css/application.css': [/^app\/Resources\/(?!external)/,/^src\//]
       'css/vendor.css': /^(vendor)/
       'css/bootstrap.css': /^app\/Resources\/external\/bootstrap-3.3.5-dist\/css.*.min.css/
   conventions:
@@ -19,10 +23,11 @@ exports.config =
       /bootstrap(-theme)?.css(.map)?/,
       /(bootstrap|npm).js/
     ]
-    #assets: /^app\/Resources\/assets/
-    assets: (path) ->
-      (not /\.woff/.test path) and /assets(\/|\\)/.test path
+
   plugins:
+    assetsmanager:
+      copyTo:
+        'fonts' : ['app/Resources/external/bootstrap-3.3.5-dist/fonts/*']
     babel: pattern: /\.(js|jsx)$/
     sass: allowCache: true
     uglify:
