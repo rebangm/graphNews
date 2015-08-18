@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new GraphNews\AdminBundle\GraphNewsAdminBundle(),
             new GraphNews\PaginatorBundle\GraphNewsPaginatorBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new GraphNews\CrawlerBundle\GraphNewsCrawlerBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

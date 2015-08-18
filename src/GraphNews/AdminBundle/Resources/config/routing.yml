@@ -1,3 +1,15 @@
 graph_news_admin_homepage:
     path:     /
     defaults: { _controller: GraphNewsAdminBundle:Default:index }
+
+graph_news_admin_site:
+    path:     /site
+    defaults: { _controller: GraphNewsAdminBundle:Default:index }
+
+graph_news_admin_sitelist:
+    path:     /site/list
+    defaults: { _controller: GraphNewsAdminBundle:Website:list }
+
+graph_news_admin_siteadd:
+    path:     /site/add
+    defaults: { _controller: GraphNewsAdminBundle:Website:add }

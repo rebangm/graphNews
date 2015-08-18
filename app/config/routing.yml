@@ -1,3 +1,7 @@
+graph_news_crawler:
+    resource: "@GraphNewsCrawlerBundle/Resources/config/routing.yml"
+    prefix:   /
+
 graph_news_front:
     resource: "@GraphNewsFrontBundle/Resources/config/routing.yml"
     prefix:   /
