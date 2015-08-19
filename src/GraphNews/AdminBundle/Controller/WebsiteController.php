@@ -2,6 +2,8 @@
 
 namespace GraphNews\AdminBundle\Controller;
 
+use GraphNews\AdminBundle\Entity\Website;
+use GraphNews\AdminBundle\Form\WebsiteType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -100,7 +102,31 @@ class WebsiteController extends Controller
 
     public function addAction()
     {
-        return $this->render('GraphNewsAdminBundle:Website:add.html.twig', array(
-            ));    }
+        if ( $this->get('security.context')->isGranted('ROLE_ADMIN') ) {
+            $request = $this->get('request');
+            $session = $request->getSession();
+
+            $website = new Website();
+
+            $form = $this->createForm(new WebsiteType(), $website);
+            if ( $request->getMethod() == 'POST' ) {
+                $form->handleRequest($request);
+                if ( $form->isValid() ) {
+
+                    $em   = $this->getDoctrine()->getManager();
+                    $em->persist($website);
+                    $em->flush();
+                    $session->getFlashBag()->add('success', 'Site ajouté avec succès!');
+                    return $this->redirect($this->generateUrl('graphnews_user_manage'));
+                } else {
+                    $session->getFlashBag()->add('error',
+                        'Données du formulaire invalide. ');
+                }
+            }
+
+            return $this->render('GraphNewsAdminBundle:Website:add.html.twig',
+                array( 'form' => $form->createView() ));
+        }
+    }
 
 }

@@ -17,7 +17,7 @@ class WebsiteType extends AbstractType
         $builder
             ->add('name')
             ->add('url')
-            ->add('enable')
+            ->add('isActive')
             ->add('frequency')
             ->add('siteTemplate')
         ;
