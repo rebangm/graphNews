@@ -2,14 +2,27 @@ graph_news_admin_homepage:
     path:     /
     defaults: { _controller: GraphNewsAdminBundle:Default:index }
 
-graph_news_admin_site:
-    path:     /site
-    defaults: { _controller: GraphNewsAdminBundle:Default:index }
-
 graph_news_admin_sitelist:
     path:     /site/list
-    defaults: { _controller: GraphNewsAdminBundle:Website:list }
+    defaults: { _controller: GraphNewsAdminBundle:Website:list, page : 1 }
+    requirements:
+        page: \d+
+
+graph_news_admin_sitelistpage:
+    pattern:   /site/list/page/{page}
+    defaults: { _controller: GraphNewsAdminBundle:Website:list, page : 1 }
+    requirements:
+        page: \d+
 
 graph_news_admin_siteadd:
     path:     /site/add
     defaults: { _controller: GraphNewsAdminBundle:Website:add }
+
+graph_news_admin_ajax_active:
+    pattern:  /site/active/id/{id}/{active}
+    defaults: { _controller: GraphNewsAdminBundle:Website:setActive, id, active }
+    requirements:
+        id: \d+
+        active: 0|1
+
+
