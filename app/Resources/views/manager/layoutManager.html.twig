@@ -12,8 +12,10 @@
             </button>
             <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="{{path('graph_news_front_homepage')}}">Home</a></li>
-                    <li class="active"><a href="{{path('graphnews_user_manage')}}">Users</a></li>
+
+                    <li class="{% if app.request.attributes.get('_route') == 'graph_news_front_homepage' %}active{% endif %}"><a href="{{path('graph_news_front_homepage')}}">Home</a></li>
+                    <li class="{% if app.request.attributes.get('_route') == 'graphnews_user_manage' %}active{% endif %}"><a href="{{path('graphnews_user_manage')}}">Users</a></li>
+                    <li class="{% if app.request.attributes.get('_route') == 'graph_news_admin_sitelist' %}active{% endif %}"><a href="{{path('graph_news_admin_sitelist')}}">Sites</a></li>
 
                     <li><a href="#contact">Contact</a></li>
                     
@@ -32,14 +34,15 @@
     {% block total %}
         <div class="row">
             <div id="leftMenu" class="col-md-2">
+                <h3>GraphNews</h3>
                 {% block leftmenu %}
-                    <h3>Mini-ERP</h3>
                     <ul class="nav nav-pills nav-stacked">
-                        <li><a href="{{ path('graph_news_front_homepage') }}">Accueil de l'application</a></li>
+                        <li><a href="{{ path('graph_news_admin_homepage') }}">Accueil de l'application</a></li>
                     </ul>
                 {% endblock %}
             </div>
             <div id="content" class="col-md-10">
+                {{ dump(app.request.attributes.get('_route')) }}
                 {% block content %}
                 {% endblock %}
             </div>
