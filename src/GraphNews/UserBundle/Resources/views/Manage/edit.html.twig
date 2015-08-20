@@ -5,10 +5,14 @@
     {% include "GraphNewsHomeBundle::alert.html.twig" %}
 
     <div class="form">
-       <form action="{{ path('graphnews_user_manage_edit', {'id': id }) }}" {{ form_enctype(form) }} method="POST" novalidate="novalidate">
-            {{ form_widget(form) }}
+        <form action="{{ path('graphnews_user_manage_edit', {'id': id }) }}" {{ form_enctype(form) }} method="POST"
+              novalidate="novalidate">
+            {% form_theme form 'GraphNewsAdminBundle:Form:form_theme_layout.html.twig' %}
+            <div class="left form-group">
+                {{ form_widget(form) }}
+            </div>
         </form>
     </div>
- 
+
 {% endblock %}
 

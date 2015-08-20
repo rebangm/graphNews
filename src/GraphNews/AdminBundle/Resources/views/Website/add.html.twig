@@ -14,8 +14,13 @@
     {% include "GraphNewsAdminBundle::alert.html.twig" %}
 
     <div class="form">
-        <form action="{{ path('graph_news_admin_siteadd') }}" {{ form_enctype(form) }} method="POST" novalidate="novalidate">
-            {{ form_widget(form) }}
+        <form action="{{ path('graph_news_admin_siteadd') }}" {{ form_enctype(form) }} method="POST"
+              novalidate="novalidate">
+            <div class="left form-group">
+                {% form_theme form 'GraphNewsAdminBundle:Form:form_theme_layout.html.twig' %}
+                {{ form_widget(form) }}
+            </div>
+
         </form>
     </div>
 

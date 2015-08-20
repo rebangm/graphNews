@@ -6,6 +6,7 @@
 
     <div class="form">
        <form action="{{ path('graphnews_user_manage_adduser') }}" {{ form_enctype(form) }} method="GraphNewsT" novalidate="novalidate">
+            {% form_theme form 'GraphNewsAdminBundle:Form:form_theme_layout.html.twig' %}
             {{ form_widget(form) }}
         </form>
     </div>
