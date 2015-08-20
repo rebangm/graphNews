@@ -114,28 +114,6 @@ class Website
         return $this->url;
     }
 
-    /**
-     * Set enable
-     *
-     * @param boolean $enable
-     * @return Website
-     */
-    public function setEnable($enable)
-    {
-        $this->enable = $enable;
-
-        return $this;
-    }
-
-    /**
-     * Get enable
-     *
-     * @return boolean 
-     */
-    public function getEnable()
-    {
-        return $this->enable;
-    }
 
     /**
      * Set frequency

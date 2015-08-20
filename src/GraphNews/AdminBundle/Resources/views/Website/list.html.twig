@@ -46,9 +46,9 @@
                 <td>{{website.name}}</td>
                 <td>{{website.url}}</td>
                 {% if website.isActive %}
-                    <td><button data-url='{{ path('graph_news_admin_ajax_active', {'id': website.id, 'active': 0 }) }}'  class="btn btn-success btn-sm"><i class="glyphicon glyphicon-ok"></i></button></td>
+                    <td><button data-url='{{ path('graph_news_admin_site_ajax_active', {'id': website.id, 'active': 0 }) }}'  class="btn btn-success btn-sm"><i class="glyphicon glyphicon-ok"></i></button></td>
                 {% else %}
-                    <td><button data-url='{{ path('graph_news_admin_ajax_active', {'id': website.id, 'active': 1 }) }}'  class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-remove"></i></button></td>
+                    <td><button data-url='{{ path('graph_news_admin_site_ajax_active', {'id': website.id, 'active': 1 }) }}'  class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-remove"></i></button></td>
                 {% endif %}
                 <td>
                     <a href="#" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-edit"></i></a>

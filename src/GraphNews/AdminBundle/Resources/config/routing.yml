@@ -18,7 +18,7 @@ graph_news_admin_siteadd:
     path:     /site/add
     defaults: { _controller: GraphNewsAdminBundle:Website:add }
 
-graph_news_admin_ajax_active:
+graph_news_admin_site_ajax_active:
     pattern:  /site/active/id/{id}/{active}
     defaults: { _controller: GraphNewsAdminBundle:Website:setActive, id, active }
     requirements:

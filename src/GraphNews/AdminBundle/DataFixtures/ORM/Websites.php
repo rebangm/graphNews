@@ -34,7 +34,7 @@ class Websites implements FixtureInterface, ContainerAwareInterface
             $sites[$i] = new Website();
             $sites[$i]->setName($i);
             $sites[$i]->setUrl($website[0]);
-            $sites[$i]->setEnable($website[1]);
+            $sites[$i]->setIsActive($website[1]);
             $sites[$i]->setFrequency($website[2]);
             $manager->persist($sites[$i]);
         }

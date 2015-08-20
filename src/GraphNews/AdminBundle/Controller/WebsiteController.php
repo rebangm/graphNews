@@ -85,7 +85,7 @@ class WebsiteController extends Controller
                     $message = array(
                         'id'     => $id,
                         'active' => $active,
-                        'url'    => $this->generateUrl('graph_news_admin_ajax_active',
+                        'url'    => $this->generateUrl('graph_news_admin_site_ajax_active',
                             array( 'id'     => $id, 'active' => ( int ) !$active )) );
                 }
             } else {

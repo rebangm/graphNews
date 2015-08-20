@@ -13,9 +13,9 @@
             <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
 
-                    <li class="{% if app.request.attributes.get('_route') == 'graph_news_front_homepage' %}active{% endif %}"><a href="{{path('graph_news_front_homepage')}}">Home</a></li>
-                    <li class="{% if app.request.attributes.get('_route') == 'graphnews_user_manage' %}active{% endif %}"><a href="{{path('graphnews_user_manage')}}">Users</a></li>
-                    <li class="{% if app.request.attributes.get('_route') == 'graph_news_admin_sitelist' %}active{% endif %}"><a href="{{path('graph_news_admin_sitelist')}}">Sites</a></li>
+                    <li class="{% if app.request.get('_route') matches '/.*_admin_homepage/' %}active{% endif %}"><a href="{{path('graph_news_front_homepage')}}">Home</a></li>
+                    <li class="{% if app.request.get('_route') matches '/.*_user_manage.*/' %}active{% endif %}"><a href="{{path('graphnews_user_manage')}}">Users</a></li>
+                    <li class="{% if app.request.get('_route') matches '/.*_admin_site.*/' %}active{% endif %}"><a href="{{path('graph_news_admin_sitelist')}}">Sites</a></li>
 
                     <li><a href="#contact">Contact</a></li>
                     
@@ -30,7 +30,7 @@
 
 </div>
 
-<div class="container-fluid" id="wrap">
+<div class="container-fluid">
     {% block total %}
         <div class="row">
             <div id="leftMenu" class="col-md-2">
@@ -42,7 +42,6 @@
                 {% endblock %}
             </div>
             <div id="content" class="col-md-10">
-                {{ dump(app.request.attributes.get('_route')) }}
                 {% block content %}
                 {% endblock %}
             </div>
