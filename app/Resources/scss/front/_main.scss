@@ -1,95 +1,139 @@
+/* GLOBAL STYLES
+-------------------------------------------------- */
+/* Padding below the footer and lighter body text */
+
 body {
-  padding-top: 40px;
   padding-bottom: 40px;
-  background-color: #f5f5f5;
+  color: #5a5a5a;
 }
 
-.row {
-  margin: 0;
-  margin-top:10px;
+
+/* CUSTOMIZE THE NAV
+-------------------------------------------------- */
+
+.site-masthead {
+  background-color: rgba(119, 119, 119, 0.91);
+  -webkit-box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
+  box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
 }
 
-.content-full{
-  margin-top: 10px;
-}
-
-.textAndButton{
-  height: 54px;
-}
-
-.textAndButton button {
+/* Nav links */
+.site-nav-item {
   position: relative;
-  top: -34px;
-  left: 110px;
-  border-radius: 0px 4px 4px 0;
+  display: inline-block;
+  padding: 10px;
+  font-weight: 500;
+  color: #bebbbf;
+}
+.site-nav-item:hover,
+.site-nav-item:focus {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Active state gets a caret at the bottom */
+.site-nav .active {
+  color: #fff;
+}
+.site-nav .active:after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 0;
+  margin-left: -5px;
+  vertical-align: middle;
+  content: " ";
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid;
+  border-left: 5px solid transparent;
 }
 
 
-.user-info{
-  color: #DDD;
-  padding-top: 14px;
-  padding-right: 15px;
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+/* Carousel base class */
+.carousel {
+  height: 500px;
+  margin-bottom: 60px;
+}
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  z-index: 10;
 }
 
-.left{
-  float : left;
+/* Declare heights because of positioning of img element */
+.carousel .item {
+  height: 500px;
+  background-color: #777;
 }
-
-.right{
-  float : right;
-}
-
-.odd{
-  background-color: #DDD;
-}
-
-.even{
-
+.carousel-inner > .item > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 500px;
 }
 
 
+/* MARKETING CONTENT
+-------------------------------------------------- */
 
-/* Wrapper for page content to push down footer */
-#wrap {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  /* Negative indent footer by it's height */
-  margin: 0 auto -60px;
+/* Center align the text within the three columns below the carousel */
+.marketing {
+  margin-top: 40px;
 }
 
-/* Set the fixed height of the footer here */
-#push,
-#footer {
-  height: 60px;
+.marketing .col-lg-4 {
+  margin-bottom: 20px;
+  text-align: center;
 }
-#footer {
-  background-color: #f5f5f5;
+.marketing h2 {
+  font-weight: normal;
+}
+.marketing .col-lg-4 p {
+  margin-right: 10px;
+  margin-left: 10px;
 }
 
-/* Lastly, apply responsive CSS fixes as necessary */
-@media (max-width: 767px) {
-  #footer {
-    margin-left: -20px;
-    margin-right: -20px;
-    padding-left: 20px;
-    padding-right: 20px;
+
+/* Featurettes
+------------------------- */
+
+.featurette-divider {
+  margin: 80px 0; /* Space out the Bootstrap <hr> more */
+}
+
+/* Thin out the marketing headings */
+.featurette-heading {
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (min-width: 768px) {
+
+
+  /* Bump up size of carousel content */
+  .carousel-caption p {
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: 1.4;
+  }
+
+  .featurette-heading {
+    font-size: 50px;
   }
 }
 
-
-
-/* Custom page CSS
--------------------------------------------------- */
-/* Not required for template or sticky footer method. */
-
-#wrap > .container {
-  padding-top: 60px;
-}
-.container .credit {
-  margin: 20px 0;
-}
-
-code {
-  font-size: 80%;
+@media (min-width: 992px) {
+  .featurette-heading {
+    margin-top: 120px;
+  }
 }

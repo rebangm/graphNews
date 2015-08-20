@@ -9,7 +9,7 @@
     {% block css %}
 
         <link href="{{ asset("css/bootstrap.css") }}" rel="stylesheet" media="screen"/>
-        <link href="{{ asset("css/application.css") }}" rel="stylesheet" media="screen"/>
+        <link href="{{ asset("css/front.css") }}" rel="stylesheet" media="screen"/>
     {% endblock %}
 
     {% block icon %}
@@ -24,8 +24,7 @@
     {% endblock %}
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-    {#
-    <script src="../assets/js/html5shiv.js"></script> #}
+    {# <script src="../assets/js/html5shiv.js"></script> #}
     <![endif]-->
 
     <!-- Fav and touch icons -->
@@ -34,18 +33,24 @@
 
 <body>
 
-{% block body %}
-{% endblock %}
+    {% block body %}
 
-{% block footer %}
-{% endblock %}
+    {% endblock %}
+
+
+    {% block footer %}
+        {% include '::front/footer.html.twig' %}
+    {% endblock %}
+
+
 
 {% block javascripts %}
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('js/external.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/application.js') }}"></script>
 {% endblock %}
 
 </body>
 </html>
+
+
+
