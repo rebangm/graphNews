@@ -2,9 +2,8 @@
 {% extends "GraphNewsUserBundle::user.html.twig" %}
 
 {% block body %}
-<div class="container">
+<div id="wrap" class="container container-signin">
     <div class="signin">
-
         <h1 class="signin-title">Manager - GraphNews</h1>
         <form class="form-signin" action="{{ path('graphnews_user_login_check') }}" method="post">
             <h2 class="form-signin-heading">Please sign in</h2>

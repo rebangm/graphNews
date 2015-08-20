@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <!-- this is a comment -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Manager - GraphNews{% endblock %}</title>
+    {% block css %}
+
+        <link href="{{ asset("css/bootstrap.css") }}" rel="stylesheet" media="screen"/>
+        <link href="{{ asset("css/application.css") }}" rel="stylesheet" media="screen"/>
+    {% endblock %}
+
+    {% block icon %}
+        <link rel="apple-touch-icon-precomposed" sizes="144x144"
+              href="{{ asset('apple-touch-icon-144-precomposed.png') }}">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114"
+              href="{{ asset('apple-touch-icon-114-precomposed.png') }}">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72"
+              href="{{ asset('apple-touch-icon-72-precomposed.png') }}">
+        <link rel="apple-touch-icon-precomposed" href="{{ asset('apple-touch-icon-57-precomposed.png') }}">
+        <link rel="shortcut icon" href="{{ asset('favicon.png') }}">
+    {% endblock %}
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    {#
+    <script src="../assets/js/html5shiv.js"></script> #}
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+
+</head>
+
+<body>
+
+{% block body %}
+{% endblock %}
+
+{% block footer %}
+    {% include '::manager/footer.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ asset('js/bootstrap.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/application.js') }}"></script>
+{% endblock %}
+
+</body>
+</html>

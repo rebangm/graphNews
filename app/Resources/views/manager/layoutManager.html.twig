@@ -1,4 +1,4 @@
-{% extends "::baseManager.html.twig" %}
+{% extends "::manager/baseManager.html.twig" %}
 
 {% block body %}
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -28,7 +28,7 @@
 
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid" id="wrap">
     {% block total %}
         <div class="row">
             <div id="leftMenu" class="col-md-2">

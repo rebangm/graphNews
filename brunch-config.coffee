@@ -14,7 +14,8 @@ exports.config =
       'js/vendor.js': /^vendor/
 
     stylesheets: joinTo:
-      'css/application.css': [/^app\/Resources\/(?!external)/,/^src\//]
+      'css/front.css': [/^app\/Resources\/(?!external).*\/front/,/^src\/.*(Front)/]
+      'css/application.css': [/^app\/Resources\/(?!external).*\/manager/,/^src\//]
       'css/vendor.css': /^(vendor)/
       'css/bootstrap.css': /^app\/Resources\/external\/bootstrap-3.3.5-dist\/css.*.min.css/
   conventions:
@@ -23,7 +24,6 @@ exports.config =
       /bootstrap(-theme)?.css(.map)?/,
       /(bootstrap|npm).js/
     ]
-
   plugins:
     assetsmanager:
       copyTo:
