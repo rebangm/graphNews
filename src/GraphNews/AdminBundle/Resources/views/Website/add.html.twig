@@ -1,7 +1,22 @@
-{% extends "::base.html.twig" %}
+{% extends "::layoutManager.html.twig" %}
 
 {% block title %}GraphNewsAdminBundle:Website:add{% endblock %}
 
-{% block body %}
-<h1>Welcome to the Website:add page</h1>
+{% block leftmenu %}
+    <ul class="nav nav-pills nav-stacked">
+        <li><a href="{{ path('graph_news_admin_sitelist') }}">Liste des Sites</a></li>
+        <li><a href="{{ path('graph_news_admin_siteadd') }}">Ajouter un site</a></li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+
+    {% include "GraphNewsAdminBundle::alert.html.twig" %}
+
+    <div class="form">
+        <form action="{{ path('graph_news_admin_siteadd') }}" {{ form_enctype(form) }} method="POST" novalidate="novalidate">
+            {{ form_widget(form) }}
+        </form>
+    </div>
+
 {% endblock %}

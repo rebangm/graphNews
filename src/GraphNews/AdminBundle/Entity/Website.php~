@@ -182,27 +182,4 @@ class Website
     {
         return $this->siteTemplate;
     }
-
-    /**
-     * Set isActive
-     *
-     * @param boolean $isActive
-     * @return Website
-     */
-    public function setIsActive($isActive)
-    {
-        $this->isActive = $isActive;
-
-        return $this;
-    }
-
-    /**
-     * Get isActive
-     *
-     * @return boolean 
-     */
-    public function getIsActive()
-    {
-        return $this->isActive;
-    }
 }
