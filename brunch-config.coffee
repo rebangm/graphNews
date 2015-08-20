@@ -24,6 +24,7 @@ exports.config =
       /bootstrap(-theme)?.css(.map)?/,
       /(bootstrap|npm).js/
     ]
+
   plugins:
     assetsmanager:
       copyTo:
