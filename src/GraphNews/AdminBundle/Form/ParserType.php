@@ -17,6 +17,9 @@ class ParserType extends AbstractType
         $builder
             ->add('name')
             ->add('format')
+            ->add('Enregistrer' , 'submit', array(
+                    'attr' => array('class' => 'btn btn-primary'))
+            )
         ;
     }
     
