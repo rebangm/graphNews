@@ -3,6 +3,7 @@
 namespace GraphNews\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Website
@@ -25,6 +26,12 @@ class Website
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = "4",
+     *      max = "255",
+     *      minMessage = "le nom doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "le nom ne peut pas être plus long que {{ limit }} caractères")
      */
     private $name;
 
@@ -32,6 +39,13 @@ class Website
      * @var string
      *
      * @ORM\Column(name="url", type="string", length=2048)
+     * @Assert\NotBlank()
+     * @Assert\Url()
+     * @Assert\Length(
+     *      min = "12",
+     *      max = "2048",
+     *      minMessage = "l'url doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "l'url ne peut pas être plus long que {{ limit }} caractères")
      */
     private $url;
 
@@ -46,6 +60,7 @@ class Website
      * @var string
      *
      * @ORM\Column(name="frequency", type="string", length=50)
+     * @Assert\NotBlank()
      */
     private $frequency;
 
@@ -55,7 +70,6 @@ class Website
      * @ORM\ManyToOne(targetEntity="GraphNews\AdminBundle\Entity\Parser")
      * @ORM\JoinColumn(nullable=true)
      */
-
     private $siteTemplate;
 
     /**

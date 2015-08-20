@@ -117,7 +117,7 @@ class WebsiteController extends Controller
                     $em->persist($website);
                     $em->flush();
                     $session->getFlashBag()->add('success', 'Site ajouté avec succès!');
-                    return $this->redirect($this->generateUrl('graphnews_user_manage'));
+                    return $this->redirect($this->generateUrl('graph_news_admin_sitelist'));
                 } else {
                     $session->getFlashBag()->add('error',
                         'Données du formulaire invalide. ');
