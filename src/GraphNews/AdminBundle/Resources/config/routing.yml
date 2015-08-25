@@ -25,4 +25,9 @@ graph_news_admin_site_ajax_active:
         id: \d+
         active: 0|1
 
+graph_news_admin_siteedit:
+    pattern:   /user/edit/{id}
+    defaults: { _controller: GraphNewsAdminBundle:Website:edit }
+    requirements:
+        page: \d+
 

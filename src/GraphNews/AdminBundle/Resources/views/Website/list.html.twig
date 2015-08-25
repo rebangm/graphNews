@@ -1,14 +1,6 @@
-{% extends "::manager/layoutManager.html.twig" %}
+{% extends "GraphNewsAdminBundle::Website/index.html.twig" %}
 
-{# block title %}GraphNewsAdminBundle:Website:list{% endblock #}
-
-{% block leftmenu %}
-    <ul class="nav nav-pills nav-stacked">
-        <li><a href="{{ path('graph_news_admin_sitelist') }}">Liste des Sites</a></li>
-        <li><a href="{{ path('graph_news_admin_siteadd') }}">Ajouter un site</a></li>
-    </ul>
-{% endblock %}
-
+{%  block title %}GraphNewsAdminBundle:Website:list{% endblock %}
 
 {% block content %}
 
@@ -51,14 +43,12 @@
                     <td><button data-url='{{ path('graph_news_admin_site_ajax_active', {'id': website.id, 'active': 1 }) }}'  class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-remove"></i></button></td>
                 {% endif %}
                 <td>
-                    <a href="#" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-edit"></i></a>
-                    {# <a href="{{ path('graphnews_user_manage_edit', {'id': website.id}) }}" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-align-left"></i></a> #}
+                    {#<a href="#" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-edit"></i></a>#}
+                    <a href="{{ path('graph_news_admin_siteedit', {'id': website.id}) }}" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-edit"></i></a>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-
 
     {{ knp_pagination_render(pagination) }}
 {% endblock %}

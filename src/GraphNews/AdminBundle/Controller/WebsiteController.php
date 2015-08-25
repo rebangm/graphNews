@@ -129,4 +129,42 @@ class WebsiteController extends Controller
         }
     }
 
+
+
+    /**
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    public function editAction($id)
+    {
+        if ( $this->get('security.context')->isGranted('ROLE_ADMIN') ) {
+            $request = $this->get('request');
+            $session = $request->getSession();
+
+            $repository = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('GraphNewsAdminBundle:Website');
+
+            $website = $repository->findOneById($id);
+            $form = $this->createForm(new WebsiteType, $website);
+            if ( $request->getMethod() == 'POST' ) {
+                $form->handleRequest($request);
+                if ( $form->isValid() ) {
+
+                    $em   = $this->getDoctrine()->getManager();
+                    $em->persist($website);
+                    $em->flush();
+                    $session->getFlashBag()->add('success',
+                        'Modification effectuée!');
+                    return $this->redirect($this->generateUrl('graph_news_admin_sitelist'));
+                } else {
+                    $session->getFlashBag()->add('error',
+                        'Données du formulaire invalide.');
+                }
+            }
+
+            return $this->render('GraphNewsAdminBundle:Website:edit.html.twig',
+                array( 'form' => $form->createView(), 'id'   => $id ));
+        }
+    }
 }

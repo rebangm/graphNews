@@ -1,20 +1,20 @@
 {% extends "GraphNewsAdminBundle::Website/index.html.twig" %}
 
-{% block title %}GraphNewsAdminBundle:Website:add{% endblock %}
+{% block title %}GraphNewsAdminBundle:Website:edit{% endblock %}
 
 {% block content %}
 
     {% include "GraphNewsAdminBundle::alert.html.twig" %}
 
     <div class="form">
-        <form action="{{ path('graph_news_admin_siteadd') }}" {{ form_enctype(form) }} method="POST"
+        <form action="{{ path('graph_news_admin_siteedit', {'id': id }) }}" {{ form_enctype(form) }} method="POST"
               novalidate="novalidate">
+            {# {% form_theme form 'GraphNewsAdminBundle:Form:form_theme_layout.html.twig' %} #}
             <div class="left form-group">
-                {% form_theme form 'GraphNewsAdminBundle:Form:form_theme_layout.html.twig' %}
                 {{ form_widget(form) }}
             </div>
-
         </form>
     </div>
 
 {% endblock %}
+
