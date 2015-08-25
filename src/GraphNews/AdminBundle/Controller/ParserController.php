@@ -2,12 +2,12 @@
 
 namespace GraphNews\AdminBundle\Controller;
 
-use GraphNews\AdminBundle\Entity\Website;
-use GraphNews\AdminBundle\Form\WebsiteType;
+use GraphNews\AdminBundle\Entity\Parser;
+use GraphNews\AdminBundle\Form\ParserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-class WebsiteController extends Controller
+class ParserController extends Controller
 {
 
     private $limitOptions = array(1,5,10,50);
@@ -119,7 +119,7 @@ class WebsiteController extends Controller
                     $session->getFlashBag()->add('success', 'Site ajouté avec succès!');
                     return $this->redirect($this->generateUrl('graph_news_admin_sitelist'));
                 } else {
-                    $session->getFlashBag()->add('danger',
+                    $session->getFlashBag()->add('error',
                         'Données du formulaire invalide. ');
                 }
             }
@@ -158,7 +158,7 @@ class WebsiteController extends Controller
                         'Modification effectuée!');
                     return $this->redirect($this->generateUrl('graph_news_admin_sitelist'));
                 } else {
-                    $session->getFlashBag()->add('danger',
+                    $session->getFlashBag()->add('error',
                         'Données du formulaire invalide.');
                 }
             }

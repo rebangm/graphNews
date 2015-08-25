@@ -32,3 +32,8 @@ function itemSetActive(button){
     });
 }
 
+$('#website-tab a').click(function (e) {
+    console.log("test");
+    e.preventDefault();
+    $(this).tab('show');
+})

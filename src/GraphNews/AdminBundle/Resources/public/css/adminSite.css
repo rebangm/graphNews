@@ -1,0 +1,10 @@
+.admin-form-button{
+    padding: 10px;
+    margin: 10px 0;
+    background-color: lightgrey;
+    border-radius: 10px;
+}
+
+.content-error{
+    padding-top: 10px;
+}

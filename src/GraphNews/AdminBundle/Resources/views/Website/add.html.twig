@@ -9,11 +9,50 @@
     <div class="form">
         <form action="{{ path('graph_news_admin_siteadd') }}" {{ form_enctype(form) }} method="POST"
               novalidate="novalidate">
-            <div class="left form-group">
-                {% form_theme form 'GraphNewsAdminBundle:Form:form_theme_layout.html.twig' %}
-                {{ form_widget(form) }}
+
+
+            <div class="admin-form-button">
+                {{ form_widget(form.Enregistrer) }}
+
             </div>
 
+            <ul id="website-tab" class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#information" aria-controls="information" role="tab" data-toggle="tab">information</a></li>
+                <li role="presentation"><a href="#parser" aria-controls="parser" role="tab" data-toggle="tab">parser</a></li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="information">
+                    <div class="left form-group">
+                        {# //{{ form_widget(form) }} #}
+                        <fieldset>
+                            {{ form_label(form.name) }}
+                            {{ form_errors(form.name) }}
+                            {{ form_widget(form.name) }}
+                        </fieldset>
+                        <fieldset>
+                            {{ form_label(form.url) }}
+                            {{ form_errors(form.url) }}
+                            {{ form_widget(form.url) }}
+                        </fieldset>
+                        <fieldset>
+                            {{ form_label(form.isActive) }}
+                            {{ form_errors(form.isActive) }}
+                            {{ form_widget(form.isActive) }}
+                        </fieldset>
+                        <fieldset>
+                            {{ form_label(form.frequency) }}
+                            {{ form_errors(form.frequency) }}
+                            {{ form_widget(form.frequency) }}
+                        </fieldset>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="parser">
+                    {{ form_label(form.siteTemplate) }}
+                    {{ form_errors(form.siteTemplate) }}
+                    {{ form_widget(form.siteTemplate) }}
+                </div>
+                {{ form_rest(form) }}
+            </div>
         </form>
     </div>
 
