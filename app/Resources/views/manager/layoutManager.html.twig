@@ -16,8 +16,9 @@
                     <li class="{% if app.request.get('_route') matches '/.*_admin_homepage/' %}active{% endif %}"><a href="{{path('graph_news_front_homepage')}}">Home</a></li>
                     <li class="{% if app.request.get('_route') matches '/.*_user_manage.*/' %}active{% endif %}"><a href="{{path('graphnews_user_manage')}}">Users</a></li>
                     <li class="{% if app.request.get('_route') matches '/.*_admin_site.*/' %}active{% endif %}"><a href="{{path('graph_news_admin_sitelist')}}">Sites</a></li>
+                    <li class="{% if app.request.get('_route') matches '/.*_admin_parser.*/' %}active{% endif %}"><a href="{{path('graph_news_admin_parserlist')}}">Parser</a></li>
 
-                    <li><a href="#contact">Contact</a></li>
+
                     
                 </ul>
 

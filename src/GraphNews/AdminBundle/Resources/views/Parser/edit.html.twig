@@ -1,0 +1,19 @@
+{% extends "GraphNewsAdminBundle::Parser/index.html.twig" %}
+
+{% block title %}GraphNewsAdminBundle:Parser:edit{% endblock %}
+
+{% block content %}
+
+    {% include "GraphNewsAdminBundle::alert.html.twig" %}
+
+    <div class="form">
+        <form action="{{ path('graph_news_admin_parseredit', {'id': id }) }}" {{ form_enctype(form) }} method="POST"
+              novalidate="novalidate">
+            {# {% form_theme form 'GraphNewsAdminBundle:Form:form_theme_layout.html.twig' %} #}
+            <div class="left form-group">
+                {{ form_widget(form) }}
+            </div>
+        </form>
+    </div>
+{% endblock %}
+

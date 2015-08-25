@@ -2,6 +2,8 @@ graph_news_admin_homepage:
     path:     /
     defaults: { _controller: GraphNewsAdminBundle:Default:index }
 
+
+
 graph_news_admin_sitelist:
     path:     /site/list
     defaults: { _controller: GraphNewsAdminBundle:Website:list, page : 1 }
@@ -26,8 +28,31 @@ graph_news_admin_site_ajax_active:
         active: 0|1
 
 graph_news_admin_siteedit:
-    pattern:   /user/edit/{id}
+    pattern:   /site/edit/{id}
     defaults: { _controller: GraphNewsAdminBundle:Website:edit }
     requirements:
         page: \d+
 
+
+
+graph_news_admin_parserlist:
+    path:     /parser/list
+    defaults: { _controller: GraphNewsAdminBundle:Parser:list, page : 1 }
+    requirements:
+        page: \d+
+
+graph_news_admin_parserlistpage:
+    path:     /parser/list/page/{page}
+    defaults: { _controller: GraphNewsAdminBundle:Parser:list, page : 1 }
+    requirements:
+        page: \d+
+
+graph_news_admin_parseradd:
+    path:     /parser/add
+    defaults: { _controller: GraphNewsAdminBundle:Parser:add }
+
+graph_news_admin_parseredit:
+    path:     /parser/edit/{id}
+    defaults: { _controller: GraphNewsAdminBundle:Parser:edit }
+    requirements:
+        page: \d+

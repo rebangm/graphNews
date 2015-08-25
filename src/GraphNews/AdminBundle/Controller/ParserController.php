@@ -10,9 +10,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class ParserController extends Controller
 {
 
-    private $limitOptions = array(1,5,10,50);
+    private $limitOptions = array(5,10,50);
 
-    private $authorizedColumns = array('id','name','url');
+    private $authorizedColumns = array('id','name');
 
 
     /**
@@ -25,7 +25,7 @@ class ParserController extends Controller
         if ( $page < 1 ) {
             $error = "the page requested doesn't exist";
             $this->get('session')->getFlashBag()->add('error', $error);
-            return $this->redirect($this->generateUrl('graph_news_admin_sitelist', array( 'page' => 1 )));
+            return $this->redirect($this->generateUrl('graph_news_admin_parserlist', array( 'page' => 1 )));
         }
 
         $limit  = (int)$this->container->get('request')->get('limit',$defaultLimit);
@@ -40,7 +40,7 @@ class ParserController extends Controller
         }
 
         $em = $this->getDoctrine()->getManager();
-        $dql   = "SELECT a FROM GraphNewsAdminBundle:Website a ORDER BY a." . $order . " ASC";
+        $dql   = "SELECT a FROM GraphNewsAdminBundle:Parser a ORDER BY a." . $order . " ASC";
 
         $query = $em->createQuery($dql);
         $paginator  = $this->get('knp_paginator');
@@ -51,53 +51,14 @@ class ParserController extends Controller
         );
 
         $pagination->setTemplate('GraphNewsPaginatorBundle::slidingPagination.html.twig');
-        $pagination->setUsedRoute('graph_news_admin_sitelistpage');
+        $pagination->setUsedRoute('graph_news_admin_parserlistpage');
 
-
-        return $this->render('GraphNewsAdminBundle:Website:list.html.twig',
+        return $this->render('GraphNewsAdminBundle:Parser:list.html.twig',
             array( 'limitOptions' => $this->limitOptions,
                 'pagination' => $pagination
             ));
-
     }
 
-    /**
-     * @param $id
-     * @param $active
-     * @return JsonResponse
-     *
-     */
-    public function setActiveAction($id, $active)
-    {
-        if ( $this->get('security.context')->isGranted('ROLE_ADMIN') ) {
-            if ($this->container->get('request')->isXmlHttpRequest()) {
-                $em   = $this->getDoctrine()->getManager();
-                $website = $em->getRepository('GraphNewsAdminBundle:Website')->find($id);
-
-
-                if ( !$website ) {
-                    $status  = 'error';
-                    $message = 'Aucun utilisateur trouvé pour cet id : ' . $id;
-                } else {
-                    $website->setIsActive($active);
-                    $em->flush();
-                    $status  = 'success';
-                    $message = array(
-                        'id'     => $id,
-                        'active' => $active,
-                        'url'    => $this->generateUrl('graph_news_admin_site_ajax_active',
-                            array( 'id'     => $id, 'active' => ( int ) !$active )) );
-                }
-            } else {
-                $status  = 'error';
-                $message = 'Not an ajax request.';
-            }
-        } else {
-            $status  = 'error';
-            $message = 'Unauthorized action for your role.';
-        }
-        return new JsonResponse(array( 'status'  => $status, 'message' => $message ));
-    }
 
 
     public function addAction()
@@ -106,9 +67,9 @@ class ParserController extends Controller
             $request = $this->get('request');
             $session = $request->getSession();
 
-            $website = new Website();
+            $website = new Parser();
 
-            $form = $this->createForm(new WebsiteType(), $website);
+            $form = $this->createForm(new ParserType(), $website);
             if ( $request->getMethod() == 'POST' ) {
                 $form->handleRequest($request);
                 if ( $form->isValid() ) {
@@ -124,7 +85,7 @@ class ParserController extends Controller
                 }
             }
 
-            return $this->render('GraphNewsAdminBundle:Website:add.html.twig',
+            return $this->render('GraphNewsAdminBundle:Parser:add.html.twig',
                 array( 'form' => $form->createView() ));
         }
     }
@@ -143,16 +104,19 @@ class ParserController extends Controller
 
             $repository = $this->getDoctrine()
                 ->getManager()
-                ->getRepository('GraphNewsAdminBundle:Website');
+                ->getRepository('GraphNewsAdminBundle:Parser');
 
-            $website = $repository->findOneById($id);
-            $form = $this->createForm(new WebsiteType, $website);
+            $parser = $repository->findOneById($id);
+
+
+            $parser->setFormat($this->jsonpp($parser->getFormat()));
+            $form = $this->createForm(new ParserType(), $parser);
             if ( $request->getMethod() == 'POST' ) {
                 $form->handleRequest($request);
                 if ( $form->isValid() ) {
 
                     $em   = $this->getDoctrine()->getManager();
-                    $em->persist($website);
+                    $em->persist($parser);
                     $em->flush();
                     $session->getFlashBag()->add('success',
                         'Modification effectuée!');
@@ -163,8 +127,30 @@ class ParserController extends Controller
                 }
             }
 
-            return $this->render('GraphNewsAdminBundle:Website:edit.html.twig',
+            return $this->render('GraphNewsAdminBundle:Parser:edit.html.twig',
                 array( 'form' => $form->createView(), 'id'   => $id ));
         }
+    }
+
+
+    protected function jsonpp($json, $istr='  ')
+    {
+        $result = '';
+        for($p=$q=$i=0; isset($json[$p]); $p++)
+        {
+            $json[$p] == '"' && ($p>0?$json[$p-1]:'') != '\\' && $q=!$q;
+            if(!$q && strchr(" \t\n\r", $json[$p])){continue;}
+            if(strchr('}]', $json[$p]) && !$q && $i--)
+            {
+                strchr('{[', $json[$p-1]) || $result .= "\n".str_repeat($istr, $i);
+            }
+            $result .= $json[$p];
+            if(strchr(',{[', $json[$p]) && !$q)
+            {
+                $i += strchr('{[', $json[$p])===FALSE?0:1;
+                strchr('}]', $json[$p+1]) || $result .= "\n".str_repeat($istr, $i);
+            }
+        }
+        return $result;
     }
 }

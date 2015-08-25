@@ -6,14 +6,13 @@ exports.config =
     wrapper: false
   paths:
     'public': 'web'
-    'watched': [ 'app/Resources','src/' ]
+    'watched': [ 'app/Resources','src/']
   files:
     javascripts: joinTo:
       'js/application.js': [/^app\/Resources\/(?!external)/, /^src\//]
       'js/bootstrap.js': /^app\/Resources\/external\/bootstrap-3.3.5-dist\/js.*.min.js/
       'js/external.js': /^app\/Resources\/external.*.min.js/
       'js/vendor.js': /^vendor/
-
 
     stylesheets: joinTo:
       'css/front.css': [/^app\/Resources\/(?!external).*\/front/,/^src\/.*(Front)/]

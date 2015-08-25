@@ -1,0 +1,53 @@
+{% extends "GraphNewsAdminBundle::Parser/index.html.twig" %}
+
+{% block title %}GraphNewsAdminBundle:Parser:list{% endblock %}
+
+
+
+{% block content %}
+
+    <h3>Manage Parser</h3>
+
+    {% include "GraphNewsAdminBundle::alert.html.twig" %}
+
+    <form class="form-horizontal search">
+        <div class="form-group col-lg-3">
+            <select id="parser_manage_select_limit" class="form-control select">
+                {% for limit in limitOptions %}
+                    <option value="{{ limit }}" {% if attribute(pagination, "getItemNumberPerPage") is defined and limit == pagination.getItemNumberPerPage() %}selected{% endif %} data-url="{{ path('graph_news_admin_parserlistpage', app.request.query.all|merge({'limit': limit })) }}">{{ limit }}</option>
+                {% endfor %}
+
+            </select>
+        </div>
+        <div class="form-group col-lg-7">
+            <input type="text" id="searchSite" class="form-control" placeholder="Search">
+        </div>
+        <button id="parserSearchSubmit" type="submit" class="btn btn-dark"><i class="glyphicon glyphicon-search"></i></button>
+
+    </form>
+
+    <table id="parserTable" class="table table-striped table-hover table-condensed">
+        <thead>
+        <tr>
+            <td class=""><a href="{{ path('graph_news_admin_parserlistpage', app.request.query.all|merge({'order': 'id' })) }}">id</a></td>
+            <td><a href="{{ path('graph_news_admin_parserlistpage', app.request.query.all|merge({'order': 'name' })) }}">Nom</a></td>
+            <td>action</td></tr>
+        </thead>
+        <tbody>
+        {% for parser in pagination %}
+            <tr {% if loop.index is odd %} class="odd"{% endif %}><td>{{parser.id}}</td>
+                <td>{{parser.name}}</td>
+                <td>
+                    <a href="{{ path('graph_news_admin_parseredit', {'id': parser.id}) }}" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-edit"></i></a>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {{ knp_pagination_render(pagination) }}
+
+
+
+{% endblock %}
+
+
