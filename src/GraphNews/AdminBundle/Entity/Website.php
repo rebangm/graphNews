@@ -67,7 +67,7 @@ class Website
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="GraphNews\AdminBundle\Entity\Parser")
+     * @ORM\ManyToOne(targetEntity="GraphNews\AdminBundle\Entity\Parser", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $siteTemplate;
@@ -197,4 +197,5 @@ class Website
     {
         return $this->isActive;
     }
+
 }

@@ -91,4 +91,8 @@ class Parser
     {
         return $this->format;
     }
+
+    public function __toString(){
+        return $this->name;
+    }
 }
