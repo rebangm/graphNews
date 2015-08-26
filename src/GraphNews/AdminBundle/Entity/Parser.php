@@ -3,6 +3,7 @@
 namespace GraphNews\AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Parser
@@ -25,6 +26,12 @@ class Parser
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = "4",
+     *      max = "255",
+     *      minMessage = "le nom doit faire au moins {{ limit }} caractères",
+     *      maxMessage = "le nom ne peut pas être plus long que {{ limit }} caractères")
      */
     private $name;
 

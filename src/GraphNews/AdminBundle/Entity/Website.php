@@ -67,6 +67,14 @@ class Website
     /**
      * @var string
      *
+     * @ORM\Column(name="lifetime", type="integer")
+     * @Assert\NotBlank()
+     */
+    private $lifetime;
+
+    /**
+     * @var string
+     *
      * @ORM\ManyToOne(targetEntity="GraphNews\AdminBundle\Entity\Parser", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */
@@ -198,4 +206,27 @@ class Website
         return $this->isActive;
     }
 
+
+    /**
+     * Set lifetime
+     *
+     * @param integer $lifetime
+     * @return Website
+     */
+    public function setLifetime($lifetime)
+    {
+        $this->lifetime = $lifetime;
+
+        return $this;
+    }
+
+    /**
+     * Get lifetime
+     *
+     * @return integer 
+     */
+    public function getLifetime()
+    {
+        return $this->lifetime;
+    }
 }
