@@ -1,8 +1,8 @@
 {
-    "name": "symfony/framework-standard-edition",
+    "name": "GraphNews",
     "license": "MIT",
     "type": "project",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "description": "Website for news",
     "autoload": {
         "psr-4": { "GraphNews\\": "src/GraphNews/", "SymfonyStandard\\": "app/SymfonyStandard/" }
     },
