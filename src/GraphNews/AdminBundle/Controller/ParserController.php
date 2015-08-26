@@ -66,19 +66,30 @@ class ParserController extends Controller
         if ( $this->get('security.context')->isGranted('ROLE_ADMIN') ) {
             $request = $this->get('request');
             $session = $request->getSession();
+            $jsonUtils = $this->get('gf_admin.jsonutils');
+            $defaultParserFilename = '@GraphNewsAdminBundle/Resources/config/parser.example.json';
 
-            $website = new Parser();
+            $kernel = $this->container->get('kernel');
+            try {
+                $path = $kernel->locateResource($defaultParserFilename);
+                $defaultParserConf = $jsonUtils->jsonPretty(file_get_contents($path));
+            }catch(\Exception $e){
+                $session->getFlashBag()->add('warning', 'Erreur de chargement de la valeur par défaut!');
+            }
 
-            $form = $this->createForm(new ParserType(), $website);
+            $parser = new Parser();
+
+            $form = $this->createForm(new ParserType(), $parser);
             if ( $request->getMethod() == 'POST' ) {
                 $form->handleRequest($request);
                 if ( $form->isValid() ) {
 
+                    $parser->setFormat($jsonUtils->jsonUglify($parser->getFormat()));
                     $em   = $this->getDoctrine()->getManager();
-                    $em->persist($website);
+                    $em->persist($parser);
                     $em->flush();
                     $session->getFlashBag()->add('success', 'Site ajouté avec succès!');
-                    return $this->redirect($this->generateUrl('graph_news_admin_sitelist'));
+                    return $this->redirect($this->generateUrl('graph_news_admin_parserlist'));
                 } else {
                     $session->getFlashBag()->add('error',
                         'Données du formulaire invalide. ');
@@ -86,7 +97,7 @@ class ParserController extends Controller
             }
 
             return $this->render('GraphNewsAdminBundle:Parser:add.html.twig',
-                array( 'form' => $form->createView() ));
+                array( 'form' => $form->createView(), 'defaultParserConf' => $defaultParserConf ));
         }
     }
 
