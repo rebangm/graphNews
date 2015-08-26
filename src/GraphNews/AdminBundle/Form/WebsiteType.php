@@ -20,6 +20,9 @@ class WebsiteType extends AbstractType
             ->add('isActive')
             ->add('frequency')
             ->add('siteTemplate')
+            ->add('lifetime','integer',array(
+                'attr' => array('class' => 'aSpinEdit'))
+            )
             ->add('Enregistrer' , 'submit', array(
                 'attr' => array('class' => 'btn btn-primary'))
             )
