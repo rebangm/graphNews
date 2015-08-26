@@ -1,5 +1,11 @@
 {% extends "::manager/layoutManager.html.twig" %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ace.js"></script>
+
+{% endblock %}
+
 {% block leftmenu %}
     <ul class="nav nav-pills nav-stacked">
         <li><a href="{{ path('graph_news_admin_parserlist') }}">Liste des Sites</a></li>

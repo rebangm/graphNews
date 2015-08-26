@@ -16,14 +16,9 @@ class ParserType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('format', 'ace_editor', array(
-                'wrapper_attr' => array(), // aceeditor wrapper html attributes.
-                'width' => 600,
-                'height' => 200,
-                'font_size' => 12,
-                'theme' => 'ace/theme/monokai'// every single default theme must have ace/theme/* prefix
-            ))
-
+            ->add('format', 'textarea',  array(
+                'attr' => array('class' => 'editor'))
+            )
             ->add('Enregistrer' , 'submit', array(
                     'attr' => array('class' => 'btn btn-primary'))
             )

@@ -10,8 +10,26 @@
         <form action="{{ path('graph_news_admin_parseredit', {'id': id }) }}" {{ form_enctype(form) }} method="POST"
               novalidate="novalidate">
             {# {% form_theme form 'GraphNewsAdminBundle:Form:form_theme_layout.html.twig' %} #}
+            <div class="admin-form-button">
+                {{ form_widget(form.Enregistrer) }}
+            </div>
             <div class="left form-group">
-                {{ form_widget(form) }}
+                <fieldset>
+                    {{ form_label(form.name) }}
+                    {{ form_errors(form.name) }}
+                    {{ form_widget(form.name) }}
+                </fieldset>
+                <fieldset id="textAreaHide">
+                    {{ form_label(form.format) }}
+                    {{ form_errors(form.format) }}
+                    {{ form_widget(form.format) }}
+                </fieldset>
+                <fieldset>
+                {{ form_label(form.format) }}
+                <div id="ace-editor" class="ace-editor">{{ form.vars.value.format }}</div>
+                </fieldset>
+
+                {{ form_rest(form) }}
             </div>
         </form>
     </div>

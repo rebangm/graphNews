@@ -6,6 +6,18 @@ $(document).ready(function() {
     $("#siteTable button").on('click',function(event){
         itemSetActive($(this));
     });
+
+
+
+    $("#textAreaHide").addClass("hide");
+    var editor = ace.edit('ace-editor');
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setMode("ace/mode/javascript");
+
+    editor.getSession().on('change', function(e) {
+        var elFormat = $('#textAreaHide textarea');
+        elFormat.text(editor.getSession().getValue());
+    });
 });
 
 

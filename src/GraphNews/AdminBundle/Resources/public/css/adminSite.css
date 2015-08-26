@@ -8,3 +8,9 @@
 .content-error{
     padding-top: 10px;
 }
+
+.ace-editor{
+    width: 700px;
+    height: 500px;
+
+}

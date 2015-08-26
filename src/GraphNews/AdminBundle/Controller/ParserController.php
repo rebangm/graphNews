@@ -109,18 +109,20 @@ class ParserController extends Controller
             $parser = $repository->findOneById($id);
 
 
-            $parser->setFormat($this->jsonpp($parser->getFormat()));
+            if ( $request->getMethod() == 'GET' ) {
+                $parser->setFormat($this->jsonPretty($parser->getFormat()));
+            }
             $form = $this->createForm(new ParserType(), $parser);
             if ( $request->getMethod() == 'POST' ) {
                 $form->handleRequest($request);
                 if ( $form->isValid() ) {
-
+                    $parser->setFormat($this->jsonUglify($parser->getFormat()));
                     $em   = $this->getDoctrine()->getManager();
                     $em->persist($parser);
                     $em->flush();
                     $session->getFlashBag()->add('success',
                         'Modification effectuée!');
-                    return $this->redirect($this->generateUrl('graph_news_admin_sitelist'));
+                    return $this->redirect($this->generateUrl('graph_news_admin_parserlist'));
                 } else {
                     $session->getFlashBag()->add('error',
                         'Données du formulaire invalide.');
@@ -132,8 +134,12 @@ class ParserController extends Controller
         }
     }
 
-
-    protected function jsonpp($json, $istr='  ')
+    /**
+     * @param $json
+     * @param string $istr
+     * @return string
+     */
+    protected function jsonPretty($json, $istr='  ')
     {
         $result = '';
         for($p=$q=$i=0; isset($json[$p]); $p++)
@@ -152,5 +158,14 @@ class ParserController extends Controller
             }
         }
         return $result;
+    }
+
+    /**
+     * @param $json
+     * @return mixed
+     */
+    protected function jsonUglify($json)
+    {
+        return preg_replace('#\s(?=([^"]*"[^"]*")*[^"]*$)#',"",$json);
     }
 }
