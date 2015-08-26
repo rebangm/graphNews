@@ -99,6 +99,7 @@ class ParserController extends Controller
     public function editAction($id)
     {
         if ( $this->get('security.context')->isGranted('ROLE_ADMIN') ) {
+            $jsonUtils = $this->get('gf_admin.jsonutils');
             $request = $this->get('request');
             $session = $request->getSession();
 
@@ -110,13 +111,13 @@ class ParserController extends Controller
 
 
             if ( $request->getMethod() == 'GET' ) {
-                $parser->setFormat($this->jsonPretty($parser->getFormat()));
+                $parser->setFormat($jsonUtils->jsonPretty($parser->getFormat()));
             }
             $form = $this->createForm(new ParserType(), $parser);
             if ( $request->getMethod() == 'POST' ) {
                 $form->handleRequest($request);
                 if ( $form->isValid() ) {
-                    $parser->setFormat($this->jsonUglify($parser->getFormat()));
+                    $parser->setFormat($jsonUtils->jsonUglify($parser->getFormat()));
                     $em   = $this->getDoctrine()->getManager();
                     $em->persist($parser);
                     $em->flush();
@@ -132,42 +133,5 @@ class ParserController extends Controller
             return $this->render('GraphNewsAdminBundle:Parser:edit.html.twig',
                 array( 'form' => $form->createView(), 'id'   => $id ));
         }
-    }
-
-    /**
-     * @param $json
-     * @param string $istr
-     * @return string
-     * TODO create separate service for reuse
-     */
-    protected function jsonPretty($json, $istr='  ')
-    {
-        $result = '';
-        for($p=$q=$i=0; isset($json[$p]); $p++)
-        {
-            $json[$p] == '"' && ($p>0?$json[$p-1]:'') != '\\' && $q=!$q;
-            if(!$q && strchr(" \t\n\r", $json[$p])){continue;}
-            if(strchr('}]', $json[$p]) && !$q && $i--)
-            {
-                strchr('{[', $json[$p-1]) || $result .= "\n".str_repeat($istr, $i);
-            }
-            $result .= $json[$p];
-            if(strchr(',{[', $json[$p]) && !$q)
-            {
-                $i += strchr('{[', $json[$p])===FALSE?0:1;
-                strchr('}]', $json[$p+1]) || $result .= "\n".str_repeat($istr, $i);
-            }
-        }
-        return $result;
-    }
-
-    /**
-     * @param $json
-     * @return mixed
-     * TODO create separate service for reuse
-     */
-    protected function jsonUglify($json)
-    {
-        return preg_replace('#\s(?=([^"]*"[^"]*")*[^"]*$)#',"",$json);
     }
 }
