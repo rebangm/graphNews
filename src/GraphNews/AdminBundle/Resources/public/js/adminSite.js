@@ -8,16 +8,27 @@ $(document).ready(function() {
     });
 
 
+    if (typeof ace !== 'undefined') {
+        $("#textAreaHide").addClass("hide");
+        var editor = ace.edit('ace-editor');
+        editor.setTheme("ace/theme/monokai");
+        editor.getSession().setMode("ace/mode/javascript");
+        editor.setFontSize(16);
 
-    $("#textAreaHide").addClass("hide");
-    var editor = ace.edit('ace-editor');
-    editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode("ace/mode/javascript");
+        editor.getSession().on('change', function (e) {
+            var elFormat = $('#textAreaHide textarea');
+            elFormat.text(editor.getSession().getValue());
+        });
+    }
 
-    editor.getSession().on('change', function(e) {
-        var elFormat = $('#textAreaHide textarea');
-        elFormat.text(editor.getSession().getValue());
+    $('.aSpinEdit').spinner({
+        min: 0,
+        max: 100,
+        step: 5
     });
+
+
+
 });
 
 

@@ -1,5 +1,14 @@
 {% extends "::manager/layoutManager.html.twig" %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+{% endblock %}
+
+{% block css %}
+    {{ parent() }}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+{% endblock %}
 {% block leftmenu %}
     <ul class="nav nav-pills nav-stacked">
         <li><a href="{{ path('graph_news_admin_sitelist') }}">Liste des Sites</a></li>
