@@ -138,6 +138,7 @@ class ParserController extends Controller
      * @param $json
      * @param string $istr
      * @return string
+     * TODO create separate service for reuse
      */
     protected function jsonPretty($json, $istr='  ')
     {
@@ -163,6 +164,7 @@ class ParserController extends Controller
     /**
      * @param $json
      * @return mixed
+     * TODO create separate service for reuse
      */
     protected function jsonUglify($json)
     {
