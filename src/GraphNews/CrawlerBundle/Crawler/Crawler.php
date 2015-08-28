@@ -50,8 +50,8 @@ class Crawler {
 
 
     public function run(){
-        foreach($this->sitesList as site){
-            
+        foreach($this->sitesList as $site){
+
         }
     }
 }
