@@ -19,14 +19,13 @@ class WorkerCommand extends DaemonCommand
     protected function configure()
     {
         $this
-            ->setName('worker:start')
+            ->setName('crawler:worker:start')
             ->setDescription('lancer un worker')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
         $output->writeln("update Time");
         usleep(100000);
     }
