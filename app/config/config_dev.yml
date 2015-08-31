@@ -16,6 +16,7 @@ monolog:
             type: stream
             path: '%kernel.logs_dir%/%kernel.environment%.log'
             level: debug
+            channels: [!crawler]
         console:
             type: console
             bubble: false
@@ -33,3 +34,8 @@ monolog:
                 VERBOSITY_DEBUG: DEBUG
             channels:
                 - doctrine
+        crawler:
+            type: stream
+            path: %kernel.root_dir%/%kernel.environment%.crawler.log
+            level: info
+            channels: [crawler]

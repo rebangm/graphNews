@@ -29,7 +29,7 @@ class WorkerCommand extends DaemonCommand
     {
 
         $em = $this->getContainer()->get('doctrine');
-        $worker = new Worker($em, $this->getContainer()->get('logger'));
+        $worker = new Worker($em, $this->getContainer()->get('logger.console'));
         $worker->run();
         usleep(100000);
     }
