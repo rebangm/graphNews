@@ -9,10 +9,10 @@
 namespace GraphNews\CrawlerBundle\Crawler;
 
 use PhpAmqpLib\Connection\AMQPStreamConnection;
-use PhpAmqpLib\Message\AMQPMessage;
-use Cron\CronExpression;
+use PhpAmqpLib\Exception\AMQPTimeoutException;
 
-class Crawler
+
+class Worker
 {
 
     protected $sitesList;
@@ -26,51 +26,28 @@ class Crawler
         $this->logger = $logger;
     }
 
-    /**
-     * add website in list for crawling
-     * @param \GraphNews\AdminBundle\Entity\Website $website
-     */
-    public function addSite(\GraphNews\AdminBundle\Entity\Website $website)
-    {
-        try {
-            if ($this->isTimeToCrawl($website->getFrequency())) {
-                $this->sitesList[$website->getId()] = $website;
-            }
-        } catch (\Exception $e) {
-
-        }
-    }
-
-    public function getSitesList()
-    {
-        return $this->sitesList;
-    }
-
-    /**
-     * @param $frequency
-     * @return bool
-     */
-    protected function isTimeToCrawl($frequency)
-    {
-        $cron = CronExpression::factory($frequency);
-        return $cron->isDue('now');
-    }
-
 
     public function run()
     {
         try {
             $this->initializeMessagingQueue();
             $channel = $this->connection->channel();
-            foreach ($this->sitesList as $site) {
-                $msg = new AMQPMessage($site->getName());
-                $channel->basic_publish($msg, '', 'working_queue');
-                $this->logger->addDebug("[x] message " . $msg->body);
+            $logger = $this->logger;
+            $callback = function ($msg) use ($logger) {
+                $logger->addDebug("[x] Received : " . $msg->body . "\n");
+            };
+
+            $channel->basic_consume('working_queue', '', false, true, false, false, $callback);
+
+            while(count($channel->callbacks)) {
+                $channel->wait(null,false,2);
             }
 
             $this->closeMessagingQueue();
+        } catch (AMQPTimeoutException $e) {
+            $this->logger->info("Worker has no more jobs to do");
         } catch (\Exception $e) {
-            $this->logger->addError($e->getMessage());
+            $this->logger->error($e->getCode(). " : " . $e->getMessage());
         }
     }
 

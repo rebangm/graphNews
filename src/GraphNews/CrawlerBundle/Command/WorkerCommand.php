@@ -4,6 +4,7 @@
 namespace GraphNews\CrawlerBundle\Command;
 
 
+use GraphNews\CrawlerBundle\Crawler\Worker;
 use GraphNews\CrawlerBundle\GraphNewsCrawlerBundle;
 use M6Web\Bundle\DaemonBundle\Command\DaemonCommand;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -26,7 +27,10 @@ class WorkerCommand extends DaemonCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln("update Time");
+
+        $em = $this->getContainer()->get('doctrine');
+        $worker = new Worker($em, $this->getContainer()->get('logger'));
+        $worker->run();
         usleep(100000);
     }
 

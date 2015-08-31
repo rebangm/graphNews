@@ -23,7 +23,8 @@
         "mtdowling/cron-expression": "^1.0",
         "paquettg/php-html-parser": "^1.6",
         "seld/jsonlint": "^1.3",
-        "m6web/daemon-bundle": "^1.3"
+        "m6web/daemon-bundle": "^1.3",
+        "videlalvaro/php-amqplib": "^2.5"
 
     },
     "require-dev": {
