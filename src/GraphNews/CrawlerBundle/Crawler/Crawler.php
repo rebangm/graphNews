@@ -76,7 +76,7 @@ class Crawler
 
     protected function initializeMessagingQueue()
     {
-        $this->connection = new AMQPStreamConnection('localhost', 5672, 'graphnews', 'test');
+        $this->connection = new AMQPStreamConnection('localhost', 5672, 'graphnews', 'test','/graphnews');
         $channel = $this->connection->channel();
         $channel->queue_declare('working_queue', false, false, false, false);
     }

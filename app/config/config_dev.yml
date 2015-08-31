@@ -12,6 +12,11 @@ web_profiler:
     intercept_redirects: false
 monolog:
     handlers:
+#        crawler:
+#            type: stream
+#            path: %kernel.logs_dir%/%kernel.environment%.crawler.log
+#            level: critical
+#            channels: [crawler]
         main:
             type: stream
             path: '%kernel.logs_dir%/%kernel.environment%.log'
@@ -34,8 +39,3 @@ monolog:
                 VERBOSITY_DEBUG: DEBUG
             channels:
                 - doctrine
-        crawler:
-            type: stream
-            path: %kernel.root_dir%/%kernel.environment%.crawler.log
-            level: info
-            channels: [crawler]

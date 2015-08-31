@@ -31,7 +31,7 @@ class CrawlerCommand extends ContainerAwareCommand
         $em = $this->getContainer()->get('doctrine');
         $websites = $em->getRepository('GraphNewsAdminBundle:Website')->findAll();
 
-        $crawler = new Crawler\Crawler($em, $this->getContainer()->get('logger_console'));
+        $crawler = new Crawler\Crawler($em, $this->getContainer()->get('monolog.logger.crawler'));
         foreach($websites as $website) {
             $crawler->addSite($website);
         }

@@ -7,8 +7,21 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
-     logger_console:
-         class: Symfony\Bridge\Monolog\Logger
-         arguments: [crawler]
-         calls:
-               - [pushHandler, [StreamHandler]]
+#    monolog.logger.crawler:
+#        class: Symfony\Bridge\Monolog\Logger
+#        arguments: [crawler]
+#        calls:
+#             - [pushHandler, [@Monolog\Handler\StreamHandler]]
+
+
+    monolog.logger.crawler:
+        class: Symfony\Bridge\Monolog\Logger
+        arguments: [@logger]
+#        tags:
+#            - { name: monolog.logger, channel: crawler }
+        calls:
+            - [pushHandler, [@gf.logger_handler.crawler]]
+
+    gf.logger_handler.crawler:
+        class:     Monolog\Handler\StreamHandler
+        arguments: [%kernel.logs_dir%/%kernel.environment%.crawler.log, 100]
